@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrubHub Express</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <img src="images/she-logo.jpg" alt="ScrubHub Express Logo" class="header-logo" />
+                <span class="header-logo-sparkle sparkle-1">
+                  <svg viewBox="0 0 20 20" fill="none"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffe066"/></svg>
+                </span>
+                <span class="header-logo-sparkle sparkle-2">
+                  <svg viewBox="0 0 16 16" fill="none"><path d="M8 0 L9 6 L16 8 L9 10 L8 16 L7 10 L0 8 L7 6 Z" fill="#fff9b2"/></svg>
+                </span>
+                <span class="header-logo-sparkle sparkle-3">
+                  <svg viewBox="0 0 14 14" fill="none"><path d="M7 0 L8 5 L14 7 L8 9 L7 14 L6 9 L0 7 L6 5 Z" fill="#fffbe6"/></svg>
+                </span>
+                <span class="header-logo-sparkle sparkle-4">
+                  <svg viewBox="0 0 10 10" fill="none"><path d="M5 0 L6 3 L10 5 L6 7 L5 10 L4 7 L0 5 L4 3 Z" fill="#fffde7"/></svg>
+                </span>
+                <h1>ScrubHub Express</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="#contact">Contact</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://wa.me/447442850748" target="_blank">Whatsapp Us</a></li>
+                        <li><a href="#" id="call-us-link">Call Us</a></li>
+                        <li><a href="mailto:info@scrubhubexpress.com">Email</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="hero home-hero">
+            <div class="cleaning-van">
+                <div class="exhaust"></div>
+                <img src="images/van.png" alt="Cleaning Van" class="van-img" />
+            </div>
+            <div class="hero-content">
+                <h2>Tired of waiting days for a cleaning service?</h2>
+                <p>With ScrubHub Express, your cleaning service is just fast, professional and affordable.</p>
+                <button class="cta-button" id="book-now-btn">Book Now</button>
+            </div>
+        </section>
+        <div id="booking-modal" class="popup-modal" style="display:none;">
+            <div class="popup-modal-content booking-form-container">
+                <button class="popup-modal-close" onclick="document.getElementById('booking-modal').style.display='none'">&times;</button>
+                <div class="booking-header">
+                    <h2>Book Your Cleaning Service</h2>
+                    <p>Fill out the form below and we'll get back to you within 2 hours</p>
+                </div>
+                <form id="booking-form" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="service-type">Service Type *</label>
+                            <select name="service-type" id="service-type" required>
+                                <option value="">Choose your service...</option>
+                                <option value="residential">🏠 Residential Cleaning</option>
+                                <option value="commercial">🏢 Commercial Cleaning</option>
+                                <option value="deep">🧹 Deep Cleaning</option>
+                                <option value="express">⚡ Same Day Express Cleaning</option>
+                            </select>
+                            <span class="error-message" id="service-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="cleaning-date">Preferred Date *</label>
+                            <input type="date" name="cleaning-date" id="cleaning-date" required min="">
+                            <span class="error-message" id="date-error"></span>
+                            <small class="form-help" id="date-help">Same day bookings available!</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Full Address & Postcode *</label>
+                        <input type="text" name="address" id="address" placeholder="Enter your full address including postcode" required>
+                        <span class="error-message" id="address-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Additional Services</label>
+                        <div class="extras-grid">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="extras" value="fridge">
+                                <span class="checkmark"></span>
+                                <span class="label-text">🧊 Fridge Clean</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="extras" value="oven">
+                                <span class="checkmark"></span>
+                                <span class="label-text">🔥 Oven Clean</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="extras" value="windows">
+                                <span class="checkmark"></span>
+                                <span class="label-text">🪟 Windows</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="extras" value="ironing">
+                                <span class="checkmark"></span>
+                                <span class="label-text">👔 Ironing</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="extras" value="laundry">
+                                <span class="checkmark"></span>
+                                <span class="label-text">👕 Laundry</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" name="name" id="name" placeholder="Enter your full name" required>
+                            <span class="error-message" id="name-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" required>
+                            <span class="error-message" id="phone-error"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" name="email" id="email" placeholder="Enter your email address" required>
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Payment Method *</label>
+                        <div class="payment-options">
+                            <label class="radio-item">
+                                <input type="radio" name="payment" value="online" required>
+                                <span class="radio-checkmark"></span>
+                                <span class="label-text">💳 Pay Online (Stripe/PayPal)</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="payment" value="cash" required>
+                                <span class="radio-checkmark"></span>
+                                <span class="label-text">💷 Pay in Cash</span>
+                            </label>
+                        </div>
+                        <span class="error-message" id="payment-error"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea name="message" id="message" rows="3" placeholder="Any special requirements, instructions, or additional information..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">Submit Booking</span>
+                        <span class="btn-loading">Sending...</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Book Now button (hero section)
+            const bookNowBtn = document.getElementById('book-now-btn');
+            if (bookNowBtn) {
+                bookNowBtn.addEventListener('click', function() {
+                    document.getElementById('booking-modal').style.display = 'flex';
+                });
+            }
+            
+            // Book a Clean button (CTA section)
+            const bookCleanBtn = document.getElementById('book-clean-btn');
+            if (bookCleanBtn) {
+                bookCleanBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Book a Clean button clicked');
+                    const modal = document.getElementById('booking-modal');
+                    if (modal) {
+                        modal.style.display = 'flex';
+                        console.log('Booking modal opened');
+                    } else {
+                        console.error('Booking modal not found');
+                    }
+                });
+            } else {
+                console.error('Book a Clean button not found');
+            }
+            
+            // Call Now button (CTA section)
+            const callNowBtn = document.getElementById('call-now-btn');
+            if (callNowBtn) {
+                callNowBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    let modal = document.getElementById('call-modal');
+                    if (!modal) {
+                        modal = document.createElement('div');
+                        modal.id = 'call-modal';
+                        modal.className = 'popup-modal';
+                        modal.innerHTML = `<div class='popup-modal-content'><button class='popup-modal-close' onclick="document.getElementById('call-modal').style.display='none'">&times;</button><div>Call us at <br><strong>+44 7442 850748</strong></div></div>`;
+                        document.body.appendChild(modal);
+                    }
+                    modal.style.display = 'flex';
+                });
+            }
+        });
+        // Allow same day bookings and add visual feedback
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('cleaning-date');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.value = today; // Set default to today
+                // No minimum date restriction - allows same day bookings
+            }
+            
+            // Add visual feedback for form selections
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            const selectElements = document.querySelectorAll('select');
+            
+            // Checkbox feedback
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const item = this.closest('.checkbox-item');
+                    if (this.checked) {
+                        item.style.transform = 'translateY(-2px)';
+                        item.style.boxShadow = '0 4px 12px rgba(79,172,254,0.2)';
+                    } else {
+                        item.style.transform = 'translateY(0)';
+                        item.style.boxShadow = 'none';
+                    }
+                });
+            });
+            
+            // Radio button feedback
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const item = this.closest('.radio-item');
+                    if (this.checked) {
+                        item.style.transform = 'translateY(-2px)';
+                        item.style.boxShadow = '0 4px 12px rgba(79,172,254,0.2)';
+                    } else {
+                        item.style.transform = 'translateY(0)';
+                        item.style.boxShadow = 'none';
+                    }
+                });
+            });
+            
+            // Select feedback
+            selectElements.forEach(select => {
+                select.addEventListener('change', function() {
+                    if (this.value) {
+                        this.style.borderColor = '#28a745';
+                        this.style.backgroundColor = '#f8fff9';
+                    } else {
+                        this.style.borderColor = '#e9ecef';
+                        this.style.backgroundColor = '#ffffff';
+                    }
+                });
+            });
+            
+            // Handle service type selection for same day express
+            const serviceTypeSelect = document.getElementById('service-type');
+            const dateInputField = document.getElementById('cleaning-date');
+            const dateHelp = document.getElementById('date-help');
+            
+            if (serviceTypeSelect && dateInputField) {
+                serviceTypeSelect.addEventListener('change', function() {
+                    const today = new Date().toISOString().split('T')[0];
+                    
+                    if (this.value === 'express') {
+                        // Same Day Express Cleaning selected
+                        dateInputField.value = today;
+                        dateInputField.readOnly = true;
+                        dateInputField.style.backgroundColor = '#f8f9fa';
+                        dateInputField.style.cursor = 'not-allowed';
+                        dateHelp.textContent = 'Date automatically set to today for Same Day Express Cleaning';
+                        dateHelp.style.color = '#28a745';
+                        dateHelp.style.fontWeight = 'bold';
+                    } else {
+                        // Other service types selected
+                        dateInputField.readOnly = false;
+                        dateInputField.style.backgroundColor = '#ffffff';
+                        dateInputField.style.cursor = 'pointer';
+                        dateHelp.textContent = 'Same day bookings available!';
+                        dateHelp.style.color = '#6c757d';
+                        dateHelp.style.fontWeight = 'normal';
+                        
+                        // If no date is set, default to today
+                        if (!dateInputField.value) {
+                            dateInputField.value = today;
+                        }
+                    }
+                });
+            }
+        });
+
+        // Form validation functions
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePhone(phone) {
+            const re = /^[\+]?[1-9][\d]{0,15}$/;
+            return re.test(phone.replace(/[\s\-\(\)]/g, ''));
+        }
+
+        function validateName(name) {
+            return name.trim().length >= 2 && /^[a-zA-Z\s]+$/.test(name);
+        }
+
+        function validateAddress(address) {
+            return address.trim().length >= 10;
+        }
+
+        function showError(elementId, message) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = message;
+                element.style.display = 'block';
+            }
+        }
+
+        function clearError(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = '';
+                element.style.display = 'none';
+            }
+        }
+
+        function addErrorClass(inputElement) {
+            inputElement.classList.add('error');
+        }
+
+        function removeErrorClass(inputElement) {
+            inputElement.classList.remove('error');
+        }
+
+        document.getElementById('booking-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitButton = form.querySelector('.submit-btn');
+            
+            // Clear all previous errors
+            const errorElements = form.querySelectorAll('.error-message');
+            errorElements.forEach(el => clearError(el.id));
+            
+            const inputs = form.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => removeErrorClass(input));
+            
+            // Validate form
+            let isValid = true;
+            
+            // Service Type validation
+            const serviceType = form['service-type'].value;
+            if (!serviceType) {
+                showError('service-error', 'Please select a service type');
+                addErrorClass(form['service-type']);
+                isValid = false;
+            }
+            
+            // Date validation - allow same day bookings
+            const cleaningDate = form['cleaning-date'].value;
+            if (!cleaningDate) {
+                showError('date-error', 'Please select a preferred date');
+                addErrorClass(form['cleaning-date']);
+                isValid = false;
+            } else {
+                // Compare date strings directly to allow same day bookings
+                const today = new Date().toISOString().split('T')[0];
+                if (cleaningDate < today) {
+                    showError('date-error', 'Please select today or a future date');
+                    addErrorClass(form['cleaning-date']);
+                    isValid = false;
+                }
+            }
+            
+            // Address validation
+            const address = form['address'].value;
+            if (!validateAddress(address)) {
+                showError('address-error', 'Please enter a complete address (minimum 10 characters)');
+                addErrorClass(form['address']);
+                isValid = false;
+            }
+            
+            // Name validation
+            const name = form['name'].value;
+            if (!validateName(name)) {
+                showError('name-error', 'Please enter a valid name (minimum 2 characters, letters only)');
+                addErrorClass(form['name']);
+                isValid = false;
+            }
+            
+            // Phone validation
+            const phone = form['phone'].value;
+            if (!validatePhone(phone)) {
+                showError('phone-error', 'Please enter a valid phone number');
+                addErrorClass(form['phone']);
+                isValid = false;
+            }
+            
+            // Email validation
+            const email = form['email'].value;
+            if (!validateEmail(email)) {
+                showError('email-error', 'Please enter a valid email address');
+                addErrorClass(form['email']);
+                isValid = false;
+            }
+            
+            // Payment method validation
+            const payment = form['payment'].value;
+            if (!payment) {
+                showError('payment-error', 'Please select a payment method');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // Show loading state
+            submitButton.classList.add('loading');
+            submitButton.disabled = true;
+            
+            const data = {
+                service: serviceType,
+                date: cleaningDate,
+                address: address,
+                extras: Array.from(form.querySelectorAll('input[name="extras"]:checked')).map(x => x.value).join(', '),
+                name: name,
+                email: email,
+                phone: phone,
+                payment: payment,
+                message: form['message'].value
+            };
+            
+            try {
+                // Generate modern purchase order PDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                
+                // Set up colors
+                const primaryColor = [42, 82, 152]; // #2a5298
+                const accentColor = [79, 172, 254]; // #4facfe
+                const textColor = [51, 51, 51]; // #333
+                const lightGray = [128, 128, 128]; // #808080
+                
+                // Header with logo and company info
+                pdf.setFillColor(...primaryColor);
+                pdf.rect(0, 0, 210, 40, 'F');
+                
+                // Company logo and name
+                pdf.setTextColor(255, 255, 255);
+                pdf.setFontSize(24);
+                pdf.setFont('helvetica', 'bold');
+                pdf.text('🧹 ScrubHub Express', 20, 25);
+                
+                // Purchase Order title
+                pdf.setFontSize(18);
+                pdf.text('PURCHASE ORDER', 150, 25);
+                
+                // Order details box
+                pdf.setFillColor(248, 249, 250); // Light gray background
+                pdf.rect(10, 50, 190, 30, 'F');
+                pdf.setDrawColor(...primaryColor);
+                pdf.rect(10, 50, 190, 30, 'S');
+                
+                // Order number and date
+                const orderNumber = 'PO-' + Date.now().toString().slice(-6);
+                const currentDate = new Date().toLocaleDateString('en-GB');
+                
+                pdf.setTextColor(...textColor);
+                pdf.setFontSize(10);
+                pdf.setFont('helvetica', 'bold');
+                pdf.text('Order Number:', 15, 60);
+                pdf.setFont('helvetica', 'normal');
+                pdf.text(orderNumber, 50, 60);
+                
+                pdf.setFont('helvetica', 'bold');
+                pdf.text('Order Date:', 15, 70);
+                pdf.setFont('helvetica', 'normal');
+                pdf.text(currentDate, 50, 70);
+                
+                pdf.setFont('helvetica', 'bold');
+                pdf.text('Service Date:', 120, 60);
+                pdf.setFont('helvetica', 'normal');
+                pdf.text(data.date, 155, 60);
+                
+                // Customer Information Section
+                pdf.setFillColor(...accentColor);
+                pdf.rect(10, 90, 95, 8, 'F');
+                pdf.setTextColor(255, 255, 255);
+                pdf.setFontSize(12);
+                pdf.setFont('helvetica', 'bold');
+                pdf.text('CUSTOMER INFORMATION', 15, 96);
+                
+                pdf.setTextColor(...textColor);
+                pdf.setFontSize(10);
+                pdf.setFont('helvetica', 'normal');
+                pdf.text('Name:', 15, 110);
+                pdf.setFont('helvetica', 'bold');
+                pdf.text(data.name, 50, 110);
+                
+                pdf.setFont('helvetica', 'normal');
+                pdf.text('Email:', 15, 120);
+                pdf.setFont('helvetica', 'bold');
+                pdf.text(data.email, 50, 120);
+                
+                pdf.setFont('helvetica', 'normal');
+                pdf.text('Phone:', 15, 130);
+                pdf.setFont('helvetica', 'bold');
+                pdf.text(data.phone, 50, 130);
+                
+                // Service Location Section
+                pdf.setFillColor(...accentColor);
+                pdf.rect(115, 90, 85, 8, 'F');
+                pdf.setTextColor(255, 255, 255);
+                pdf.setFontSize(12);
+                pdf.setFont('helvetica', 'bold');
+                pdf.text('SERVICE LOCATION', 120, 96);
+                
+                pdf.setTextColor(...textColor);
+                pdf.setFontSize(10);
+                pdf.setFont('helvetica', 'normal');
+                pdf.text('Address:', 120, 110);
+                pdf.setFont('helvetica', 'bold');
+                
+                // Split address into multiple lines if needed
+                const addressLines = pdf.splitTextToSize(data.address, 70);
+                pdf.text(addressLines, 120, 120);
+                
+                // Service Details Section
+                pdf.setFillColor(...accentColor);
+                pdf.rect(10, 150, 190, 8, 'F');
+                pdf.setTextColor(255, 255, 255);
+                pdf.setFontSize(12);
+                pdf.setFont('helvetica', 'bold');
+                pdf.text('SERVICE DETAILS', 15, 156);
+                
+                // Service table
+                pdf.setFillColor(248, 249, 250);
+                pdf.rect(10, 165, 190, 40, 'F');
+                pdf.setDrawColor(...primaryColor);
+                pdf.rect(10, 165, 190, 40, 'S');
+                
+                // Table headers
+                pdf.setTextColor(...primaryColor);
+                pdf.setFontSize(10);
+                pdf.setFont('helvetica', 'bold');
+                pdf.text('Service Type', 15, 175);
+                pdf.text('Details', 80, 175);
+                pdf.text('Payment Method', 150, 175);
+                
+                // Table content
+                pdf.setTextColor(...textColor);
+                pdf.setFont('helvetica', 'normal');
+                pdf.text(data.service, 15, 185);
+                pdf.text('Professional cleaning service', 80, 185);
+                pdf.text(data.payment, 150, 185);
+                
+                // Additional services
+                if (data.extras) {
+                    pdf.text('Additional Services:', 15, 200);
+                    pdf.setFontSize(9);
+                    pdf.text(data.extras, 15, 210);
+                }
+                
+                // Additional Information Section
+                if (data.message) {
+                    pdf.setFillColor(...accentColor);
+                    pdf.rect(10, 220, 190, 8, 'F');
+                    pdf.setTextColor(255, 255, 255);
+                    pdf.setFontSize(12);
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.text('ADDITIONAL INFORMATION', 15, 226);
+                    
+                    pdf.setTextColor(...textColor);
+                    pdf.setFontSize(10);
+                    pdf.setFont('helvetica', 'normal');
+                    const messageLines = pdf.splitTextToSize(data.message, 180);
+                    pdf.text(messageLines, 15, 240);
+                }
+                
+                // Footer
+                pdf.setFillColor(...primaryColor);
+                pdf.rect(0, 270, 210, 30, 'F');
+                
+                pdf.setTextColor(255, 255, 255);
+                pdf.setFontSize(10);
+                pdf.setFont('helvetica', 'normal');
+                pdf.text('Thank you for choosing ScrubHub Express!', 105, 280, { align: 'center' });
+                pdf.setFontSize(8);
+                pdf.text(`Order generated on ${new Date().toLocaleString()}`, 105, 290, { align: 'center' });
+                pdf.text('📧 joey.popkorn@gmail.com | 📞 +44 7442 850748', 105, 300, { align: 'center' });
+                
+                // Save PDF
+                const pdfBlob = pdf.output('blob');
+                const pdfUrl = URL.createObjectURL(pdfBlob);
+                
+                // Create a formatted message for WhatsApp/Email
+                const formattedMessage = `🧹 *NEW SCRUBHUB EXPRESS BOOKING* 🧹
+
+*Customer Details:*
+👤 Name: ${data.name}
+📧 Email: ${data.email}
+📞 Phone: ${data.phone}
+
+*Service Details:*
+🔧 Service: ${data.service}
+📅 Date: ${data.date}
+📍 Address: ${data.address}
+💳 Payment: ${data.payment}
+
+*Additional Services:*
+${data.extras || 'None selected'}
+
+*Additional Information:*
+${data.message || 'None provided'}
+
+*Order Number:* PO-${Date.now().toString().slice(-6)}
+*Order Date:* ${new Date().toLocaleDateString('en-GB')}
+
+---
+📧 joey.popkorn@gmail.com
+📞 +44 7442 850748`;
+
+                // Store booking data in localStorage for backup
+                const bookingData = {
+                    timestamp: new Date().toISOString(),
+                    orderNumber: 'PO-' + Date.now().toString().slice(-6),
+                    customer: {
+                        name: data.name,
+                        email: data.email,
+                        phone: data.phone
+                    },
+                    service: {
+                        type: data.service,
+                        date: data.date,
+                        address: data.address,
+                        extras: data.extras || 'None selected',
+                        payment: data.payment,
+                        additionalInfo: data.message || 'None provided'
+                    },
+                    formattedMessage: formattedMessage
+                };
+                
+                // Store in localStorage
+                const existingBookings = JSON.parse(localStorage.getItem('scrubhubBookings') || '[]');
+                existingBookings.push(bookingData);
+                localStorage.setItem('scrubhubBookings', JSON.stringify(existingBookings));
+                
+                // Create a data URL for the PDF
+                const pdfDataUrl = pdf.output('datauristring');
+                
+                // For now, simulate successful submission
+                // In production, you would integrate with a real email service
+                const response = { ok: true };
+                
+                // Log the booking data for debugging
+                console.log('Booking submitted:', bookingData);
+                console.log('PDF generated:', pdfDataUrl.substring(0, 100) + '...');
+                
+                if (response.ok) {
+                    // Clear all form fields
+                    form.reset();
+                    
+                    // Clear all visual feedback
+                    const inputs = form.querySelectorAll('input, select, textarea');
+                    inputs.forEach(input => {
+                        input.classList.remove('error');
+                        input.style.borderColor = '#e9ecef';
+                        input.style.backgroundColor = '#ffffff';
+                        input.style.transform = 'translateY(0)';
+                        input.style.boxShadow = 'none';
+                    });
+                    
+                    // Clear checkbox and radio button visual states
+                    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+                    const radioButtons = form.querySelectorAll('input[type="radio"]');
+                    
+                    checkboxes.forEach(checkbox => {
+                        const item = checkbox.closest('.checkbox-item');
+                        if (item) {
+                            item.style.transform = 'translateY(0)';
+                            item.style.boxShadow = 'none';
+                        }
+                    });
+                    
+                    radioButtons.forEach(radio => {
+                        const item = radio.closest('.radio-item');
+                        if (item) {
+                            item.style.transform = 'translateY(0)';
+                            item.style.boxShadow = 'none';
+                        }
+                    });
+                    
+                    // Clear all error messages
+                    const errorElements = form.querySelectorAll('.error-message');
+                    errorElements.forEach(el => {
+                        el.textContent = '';
+                        el.style.display = 'none';
+                    });
+                    
+                    // Reset date input to allow same day bookings
+                    const dateInput = document.getElementById('cleaning-date');
+                    const dateHelp = document.getElementById('date-help');
+                    if (dateInput) {
+                        const today = new Date().toISOString().split('T')[0];
+                        dateInput.value = today; // Set default to today
+                        dateInput.readOnly = false;
+                        dateInput.style.backgroundColor = '#ffffff';
+                        dateInput.style.cursor = 'pointer';
+                        // Reset help text
+                        if (dateHelp) {
+                            dateHelp.textContent = 'Same day bookings available!';
+                            dateHelp.style.color = '#6c757d';
+                            dateHelp.style.fontWeight = 'normal';
+                        }
+                        // No minimum date restriction - allows same day bookings
+                    }
+                    
+                    // Close modal
+                    document.getElementById('booking-modal').style.display = 'none';
+                    
+                    // Show success popup notification
+                    showSuccessNotification();
+                    
+                } else {
+                    throw new Error('Form submission failed');
+                }
+                
+            } catch (error) {
+                console.error('Error submitting booking:', error);
+                
+                // Show error message to user
+                alert('❌ There was an error submitting your booking. Please try again or contact us directly at joey.popkorn@gmail.com');
+                
+            } finally {
+                // Reset button state
+                submitButton.classList.remove('loading');
+                submitButton.disabled = false;
+            }
+        });
+        </script>
+
+        <section class="why-choose">
+            <h2>Why Choose ScrubHub Express</h2>
+            <div class="why-icons-row">
+                <div class="why-icon-item">
+                    <div class="why-icon">⏱️</div>
+                    <div class="why-label">Same Day Cleaning Available</div>
+                </div>
+                <div class="why-icon-item">
+                    <div class="why-icon">🛡️</div>
+                    <div class="why-label">Vetted and Insured Cleaners</div>
+                </div>
+                <div class="why-icon-item">
+                    <div class="why-icon">💻</div>
+                    <div class="why-label">Easy Online Booking</div>
+                </div>
+                <div class="why-icon-item">
+                    <div class="why-icon">💳</div>
+                    <div class="why-label">Pay Online or Cash</div>
+                </div>
+                <div class="why-icon-item">
+                    <div class="why-icon">📍</div>
+                    <div class="why-label">Local Hull-Based Team</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services" id="services">
+            <h3>Our Services</h3>
+            <div class="services-grid">
+                <a href="services.html" class="service-link">
+                    <div class="service-card">
+                        <div class="service-icon">🏠</div>
+                        <h4>Residential Cleaning</h4>
+                        <p>Complete home cleaning services tailored to your needs</p>
+                    </div>
+                </a>
+                <a href="services.html" class="service-link">
+                    <div class="service-card">
+                        <div class="service-icon">🏢</div>
+                        <h4>Commercial Cleaning</h4>
+                        <p>Professional cleaning for offices and businesses</p>
+                    </div>
+                </a>
+                <a href="services.html" class="service-link">
+                    <div class="service-card">
+                        <div class="service-icon">🧹</div>
+                        <h4>Deep Cleaning</h4>
+                        <p>Thorough cleaning for special occasions or move-outs</p>
+                    </div>
+                </a>
+                <a href="services.html" class="service-link">
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h4>Same Day Express Cleaning</h4>
+                        <p>Get your space cleaned on the same day with our express service</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <section class="cta-section">
+            <h2>Ready for a spotless office/home?</h2>
+            <div class="cta-buttons">
+                <a href="#" class="cta-btn" id="book-clean-btn">
+                    <span class="cta-icon">🧹</span>
+                    <span>Book a Clean</span>
+                </a>
+                <a href="https://wa.me/447442850748" class="cta-btn" target="_blank">
+                    <span class="cta-icon">💬</span>
+                    <span>WhatsApp Us</span>
+                </a>
+                <a href="#" class="cta-btn" id="call-now-btn">
+                    <span class="cta-icon">📞</span>
+                    <span>Call Now</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 ScrubHub Express. All rights reserved.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Navigation dropdown call link
+      var callLink = document.getElementById('call-us-link');
+      if (callLink) {
+        callLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          let modal = document.getElementById('call-modal');
+          if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'call-modal';
+            modal.className = 'popup-modal';
+            modal.innerHTML = `<div class='popup-modal-content'><button class='popup-modal-close' onclick="document.getElementById('call-modal').style.display='none'">&times;</button><div>Call us at <br><strong>+44 7442 850748</strong></div></div>`;
+            document.body.appendChild(modal);
+          }
+          modal.style.display = 'flex';
+        });
+      }
+      
+      // CTA section call now button
+      var callNowBtn = document.getElementById('call-now-btn');
+      if (callNowBtn) {
+        callNowBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          let modal = document.getElementById('call-modal');
+          if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'call-modal';
+            modal.className = 'popup-modal';
+            modal.innerHTML = `<div class='popup-modal-content'><button class='popup-modal-close' onclick="document.getElementById('call-modal').style.display='none'">&times;</button><div>Call us at <br><strong>+44 7442 850748</strong></div></div>`;
+            document.body.appendChild(modal);
+          }
+          modal.style.display = 'flex';
+        });
+      }
+            });
+        
+        // Success notification function
+        function showSuccessNotification() {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'success-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <div class="notification-icon">✅</div>
+                    <div class="notification-text">
+                        <h3>Booking Sent Successfully!</h3>
+                        <p>Your booking has been sent to our team. We will contact you within 2 hours to confirm your appointment.</p>
+                        <p class="notification-details">📧 Email sent to: joey.popkorn@gmail.com</p>
+                        <p class="notification-details">📞 Contact: +44 7442 850748</p>
+                    </div>
+                    <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+                </div>
+            `;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Auto-close after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
