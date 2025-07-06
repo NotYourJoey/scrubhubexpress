@@ -3,18 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScrubHub Express</title>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <!-- Primary Meta Tags -->
+    <title>ScrubHub Express - Professional Cleaning Services in Hull | Same Day Express Cleaning</title>
+    <meta name="title" content="ScrubHub Express - Professional Cleaning Services in Hull | Same Day Express Cleaning">
+    <meta name="description" content="Professional cleaning services in Hull and surrounding areas. Fast, reliable residential and commercial cleaning with same-day express service. Book online or call +44 7442 850748.">
+    <meta name="keywords" content="cleaning services Hull, house cleaning Hull, commercial cleaning Hull, deep cleaning Hull, same day cleaning Hull, express cleaning Hull, professional cleaners Hull, office cleaning Hull, residential cleaning Hull, eco-friendly cleaning Hull">
+    <meta name="author" content="ScrubHub Express">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://scrubhubexpress.co.uk/">
+    <meta property="og:title" content="ScrubHub Express - Professional Cleaning Services in Hull">
+    <meta property="og:description" content="Professional cleaning services in Hull and surrounding areas. Fast, reliable residential and commercial cleaning with same-day express service.">
+    <meta property="og:image" content="https://scrubhubexpress.co.uk/images/hero-bg-2.jpeg">
+    <meta property="og:site_name" content="ScrubHub Express">
+    <meta property="og:locale" content="en_GB">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://scrubhubexpress.co.uk/">
+    <meta property="twitter:title" content="ScrubHub Express - Professional Cleaning Services in Hull">
+    <meta property="twitter:description" content="Professional cleaning services in Hull and surrounding areas. Fast, reliable residential and commercial cleaning with same-day express service.">
+    <meta property="twitter:image" content="https://scrubhubexpress.co.uk/images/hero-bg-2.jpeg">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="geo.region" content="GB-HUL">
+    <meta name="geo.placename" content="Hull, East Riding of Yorkshire">
+    <meta name="geo.position" content="53.7443;-0.3325">
+    <meta name="ICBM" content="53.7443, -0.3325">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://scrubhubexpress.co.uk/">
+    
+            <!-- Favicon -->
+        <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+        <link rel="icon" type="image/svg+xml" href="images/favicon-logo.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="images/hero-bg-2.jpeg" as="image">
+    <link rel="preload" href="images/she-logo.jpg" as="image">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=1.1">
+    
+    <!-- External Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "ScrubHub Express",
+        "description": "Professional cleaning services in Hull and surrounding areas. Fast, reliable residential and commercial cleaning with same-day express service.",
+        "url": "https://scrubhubexpress.co.uk",
+        "logo": "https://scrubhubexpress.co.uk/images/she-logo.jpg",
+        "image": "https://scrubhubexpress.co.uk/images/hero-bg-2.jpeg",
+        "telephone": "+44 7442 850748",
+        "email": "info@scrubhubexpress.co.uk",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Hull",
+            "addressRegion": "East Riding of Yorkshire",
+            "addressCountry": "GB"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 53.7443,
+            "longitude": -0.3325
+        },
+        "openingHours": "Mo-Su 08:00-20:00",
+        "priceRange": "££",
+        "serviceArea": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+                "@type": "GeoCoordinates",
+                "latitude": 53.7443,
+                "longitude": -0.3325
+            },
+            "geoRadius": "25000"
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Cleaning Services",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Residential Cleaning",
+                        "description": "Complete home cleaning services tailored to your needs"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Commercial Cleaning",
+                        "description": "Professional cleaning for offices and businesses"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Deep Cleaning",
+                        "description": "Thorough cleaning for special occasions or move-outs"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Same Day Express Cleaning",
+                        "description": "Get your space cleaned on the same day with our express service"
+                    }
+                }
+            ]
+        },
+        "sameAs": [
+            "https://www.facebook.com/share/1EenSjNNDb/?mibextid=wwXIfr",
+            "https://www.instagram.com/scrubhub_express",
+            "https://www.tiktok.com/@scrubhub_express"
+        ]
+    }
+    </script>
+    
+    <!-- Breadcrumb Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://scrubhubexpress.co.uk/"
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
     <header class="header">
@@ -55,12 +201,12 @@
         <section class="hero home-hero">
             <div class="cleaning-van">
                 <div class="exhaust"></div>
-                <img src="images/van.png" alt="Cleaning Van" class="van-img" />
+                <img src="images/van.png" alt="ScrubHub Express Cleaning Van - Professional Cleaning Services Hull" class="van-img" />
             </div>
             <div class="hero-content">
-                <h2>Tired of waiting days for a cleaning service?</h2>
+                <h1>Tired of waiting days for a cleaning service?</h1>
                 <p>With ScrubHub Express, your cleaning service is just fast, professional and affordable.</p>
-                <button class="cta-button" id="book-now-btn">Book Now</button>
+                <button class="cta-button" id="book-now-btn" aria-label="Book cleaning service now">Book Now</button>
             </div>
         </section>
         <div id="booking-modal" class="popup-modal" style="display:none;">
@@ -70,16 +216,17 @@
                     <h2>Book Your Cleaning Service</h2>
                     <p>Fill out the form below and we'll get back to you within 2 hours</p>
                 </div>
-                <form id="booking-form" novalidate>
+                <div class="form-content-wrapper">
+                    <form id="booking-form" novalidate>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="service-type">Service Type *</label>
                             <select name="service-type" id="service-type" required>
                                 <option value="">Choose your service...</option>
-                                <option value="residential">🏠 Residential Cleaning</option>
-                                <option value="commercial">🏢 Commercial Cleaning</option>
-                                <option value="deep">🧹 Deep Cleaning</option>
-                                <option value="express">⚡ Same Day Express Cleaning</option>
+                                <option value="residential">Residential Cleaning</option>
+                                <option value="commercial">Commercial Cleaning</option>
+                                <option value="deep">Deep Cleaning</option>
+                                <option value="express">Same Day Express Cleaning</option>
                             </select>
                             <span class="error-message" id="service-error"></span>
                         </div>
@@ -103,27 +250,27 @@
                             <label class="checkbox-item">
                                 <input type="checkbox" name="extras" value="fridge">
                                 <span class="checkmark"></span>
-                                <span class="label-text">🧊 Fridge Clean</span>
+                                <span class="label-text">Fridge </span>
                             </label>
                             <label class="checkbox-item">
                                 <input type="checkbox" name="extras" value="oven">
                                 <span class="checkmark"></span>
-                                <span class="label-text">🔥 Oven Clean</span>
+                                <span class="label-text">Oven </span>
                             </label>
                             <label class="checkbox-item">
                                 <input type="checkbox" name="extras" value="windows">
                                 <span class="checkmark"></span>
-                                <span class="label-text">🪟 Windows</span>
+                                <span class="label-text">Windows</span>
                             </label>
                             <label class="checkbox-item">
                                 <input type="checkbox" name="extras" value="ironing">
                                 <span class="checkmark"></span>
-                                <span class="label-text">👔 Ironing</span>
+                                <span class="label-text">Ironing</span>
                             </label>
                             <label class="checkbox-item">
                                 <input type="checkbox" name="extras" value="laundry">
                                 <span class="checkmark"></span>
-                                <span class="label-text">👕 Laundry</span>
+                                <span class="label-text">Laundry</span>
                             </label>
                         </div>
                     </div>
@@ -153,12 +300,12 @@
                             <label class="radio-item">
                                 <input type="radio" name="payment" value="online" required>
                                 <span class="radio-checkmark"></span>
-                                <span class="label-text">💳 Pay Online (Stripe/PayPal)</span>
+                                <span class="label-text">Pay Online (Stripe/PayPal)</span>
                             </label>
                             <label class="radio-item">
                                 <input type="radio" name="payment" value="cash" required>
                                 <span class="radio-checkmark"></span>
-                                <span class="label-text">💷 Pay in Cash</span>
+                                <span class="label-text">Pay in Cash</span>
                             </label>
                         </div>
                         <span class="error-message" id="payment-error"></span>
@@ -174,6 +321,7 @@
                         <span class="btn-loading">Sending...</span>
                     </button>
                 </form>
+                </div>
             </div>
         </div>
         <script>
@@ -199,11 +347,9 @@
             if (bookCleanBtn) {
                 bookCleanBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    console.log('Book a Clean button clicked');
                     const modal = document.getElementById('booking-modal');
                     if (modal) {
                         modal.style.display = 'flex';
-                        console.log('Booking modal opened');
                     } else {
                         console.error('Booking modal not found');
                     }
@@ -363,6 +509,7 @@
             inputElement.classList.remove('error');
         }
 
+        // Firebase booking form submission
         document.getElementById('booking-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
@@ -449,383 +596,128 @@
             submitButton.classList.add('loading');
             submitButton.disabled = true;
             
-            const data = {
-                service: serviceType,
-                date: cleaningDate,
-                address: address,
-                extras: Array.from(form.querySelectorAll('input[name="extras"]:checked')).map(x => x.value).join(', '),
-                name: name,
-                email: email,
-                phone: phone,
-                payment: payment,
-                message: form['message'].value
-            };
-            
             try {
-                // Generate modern purchase order PDF
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                
-                // Set up colors
-                const primaryColor = [42, 82, 152]; // #2a5298
-                const accentColor = [79, 172, 254]; // #4facfe
-                const textColor = [51, 51, 51]; // #333
-                const lightGray = [128, 128, 128]; // #808080
-                
-                // Header with logo and company info
-                pdf.setFillColor(...primaryColor);
-                pdf.rect(0, 0, 210, 40, 'F');
-                
-                // Company logo and name
-                pdf.setTextColor(255, 255, 255);
-                pdf.setFontSize(24);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('🧹 ScrubHub Express', 20, 25);
-                
-                // Purchase Order title
-                pdf.setFontSize(18);
-                pdf.text('PURCHASE ORDER', 150, 25);
-                
-                // Order details box
-                pdf.setFillColor(248, 249, 250); // Light gray background
-                pdf.rect(10, 50, 190, 30, 'F');
-                pdf.setDrawColor(...primaryColor);
-                pdf.rect(10, 50, 190, 30, 'S');
-                
-                // Order number and date
-                const orderNumber = 'PO-' + Date.now().toString().slice(-6);
-                const currentDate = new Date().toLocaleDateString('en-GB');
-                
-                pdf.setTextColor(...textColor);
-                pdf.setFontSize(10);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('Order Number:', 15, 60);
-                pdf.setFont('helvetica', 'normal');
-                pdf.text(orderNumber, 50, 60);
-                
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('Order Date:', 15, 70);
-                pdf.setFont('helvetica', 'normal');
-                pdf.text(currentDate, 50, 70);
-                
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('Service Date:', 120, 60);
-                pdf.setFont('helvetica', 'normal');
-                pdf.text(data.date, 155, 60);
-                
-                // Customer Information Section
-                pdf.setFillColor(...accentColor);
-                pdf.rect(10, 90, 95, 8, 'F');
-                pdf.setTextColor(255, 255, 255);
-                pdf.setFontSize(12);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('CUSTOMER INFORMATION', 15, 96);
-                
-                pdf.setTextColor(...textColor);
-                pdf.setFontSize(10);
-                pdf.setFont('helvetica', 'normal');
-                pdf.text('Name:', 15, 110);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text(data.name, 50, 110);
-                
-                pdf.setFont('helvetica', 'normal');
-                pdf.text('Email:', 15, 120);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text(data.email, 50, 120);
-                
-                pdf.setFont('helvetica', 'normal');
-                pdf.text('Phone:', 15, 130);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text(data.phone, 50, 130);
-                
-                // Service Location Section
-                pdf.setFillColor(...accentColor);
-                pdf.rect(115, 90, 85, 8, 'F');
-                pdf.setTextColor(255, 255, 255);
-                pdf.setFontSize(12);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('SERVICE LOCATION', 120, 96);
-                
-                pdf.setTextColor(...textColor);
-                pdf.setFontSize(10);
-                pdf.setFont('helvetica', 'normal');
-                pdf.text('Address:', 120, 110);
-                pdf.setFont('helvetica', 'bold');
-                
-                // Split address into multiple lines if needed
-                const addressLines = pdf.splitTextToSize(data.address, 70);
-                pdf.text(addressLines, 120, 120);
-                
-                // Service Details Section
-                pdf.setFillColor(...accentColor);
-                pdf.rect(10, 150, 190, 8, 'F');
-                pdf.setTextColor(255, 255, 255);
-                pdf.setFontSize(12);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('SERVICE DETAILS', 15, 156);
-                
-                // Service table
-                pdf.setFillColor(248, 249, 250);
-                pdf.rect(10, 165, 190, 40, 'F');
-                pdf.setDrawColor(...primaryColor);
-                pdf.rect(10, 165, 190, 40, 'S');
-                
-                // Table headers
-                pdf.setTextColor(...primaryColor);
-                pdf.setFontSize(10);
-                pdf.setFont('helvetica', 'bold');
-                pdf.text('Service Type', 15, 175);
-                pdf.text('Details', 80, 175);
-                pdf.text('Payment Method', 150, 175);
-                
-                // Table content
-                pdf.setTextColor(...textColor);
-                pdf.setFont('helvetica', 'normal');
-                pdf.text(data.service, 15, 185);
-                pdf.text('Professional cleaning service', 80, 185);
-                pdf.text(data.payment, 150, 185);
-                
-                // Additional services
-                if (data.extras) {
-                    pdf.text('Additional Services:', 15, 200);
-                    pdf.setFontSize(9);
-                    pdf.text(data.extras, 15, 210);
+                // Check if Firebase is loaded
+                if (typeof firebase === 'undefined') {
+                    throw new Error('Firebase is not loaded');
                 }
                 
-                // Additional Information Section
-                if (data.message) {
-                    pdf.setFillColor(...accentColor);
-                    pdf.rect(10, 220, 190, 8, 'F');
-                    pdf.setTextColor(255, 255, 255);
-                    pdf.setFontSize(12);
-                    pdf.setFont('helvetica', 'bold');
-                    pdf.text('ADDITIONAL INFORMATION', 15, 226);
-                    
-                    pdf.setTextColor(...textColor);
-                    pdf.setFontSize(10);
-                    pdf.setFont('helvetica', 'normal');
-                    const messageLines = pdf.splitTextToSize(data.message, 180);
-                    pdf.text(messageLines, 15, 240);
+                if (typeof db === 'undefined') {
+                    throw new Error('Firebase database is not initialized');
                 }
                 
-                // Footer
-                pdf.setFillColor(...primaryColor);
-                pdf.rect(0, 270, 210, 30, 'F');
-                
-                pdf.setTextColor(255, 255, 255);
-                pdf.setFontSize(10);
-                pdf.setFont('helvetica', 'normal');
-                pdf.text('Thank you for choosing ScrubHub Express!', 105, 280, { align: 'center' });
-                pdf.setFontSize(8);
-                pdf.text(`Order generated on ${new Date().toLocaleString()}`, 105, 290, { align: 'center' });
-                pdf.text('📧 info@scrubhubexpress.co.uk | 📞 +44 7442 850748', 105, 300, { align: 'center' });
-                
-                // Save PDF
-                const pdfBlob = pdf.output('blob');
-                const pdfUrl = URL.createObjectURL(pdfBlob);
-                
-                // Create a formatted message for WhatsApp/Email
-                const formattedMessage = `🧹 *NEW SCRUBHUB EXPRESS BOOKING* 🧹
-
-*Customer Details:*
-👤 Name: ${data.name}
-📧 Email: ${data.email}
-📞 Phone: ${data.phone}
-
-*Service Details:*
-🔧 Service: ${data.service}
-📅 Date: ${data.date}
-📍 Address: ${data.address}
-💳 Payment: ${data.payment}
-
-*Additional Services:*
-${data.extras || 'None selected'}
-
-*Additional Information:*
-${data.message || 'None provided'}
-
-*Order Number:* PO-${Date.now().toString().slice(-6)}
-*Order Date:* ${new Date().toLocaleDateString('en-GB')}
-
----
-                📧 info@scrubhubexpress.co.uk
-📞 +44 7442 850748`;
-
-                // Store booking data in localStorage for backup
+                // Get form data for Firebase
+                const formData = new FormData(form);
                 const bookingData = {
-                    timestamp: new Date().toISOString(),
-                    orderNumber: 'PO-' + Date.now().toString().slice(-6),
-                    customer: {
-                        name: data.name,
-                        email: data.email,
-                        phone: data.phone
-                    },
-                    service: {
-                        type: data.service,
-                        date: data.date,
-                        address: data.address,
-                        extras: data.extras || 'None selected',
-                        payment: data.payment,
-                        additionalInfo: data.message || 'None provided'
-                    },
-                    formattedMessage: formattedMessage
+                    serviceType: formData.get('service-type'),
+                    cleaningDate: formData.get('cleaning-date'),
+                    address: formData.get('address'),
+                    extras: formData.getAll('extras'),
+                    name: formData.get('name'),
+                    phone: formData.get('phone'),
+                    email: formData.get('email'),
+                    payment: formData.get('payment'),
+                    message: formData.get('message'),
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    status: 'pending'
                 };
+
+                // Save to Firebase
+                const docRef = await db.collection('bookings').add(bookingData);
                 
-                // Store in localStorage
-                const existingBookings = JSON.parse(localStorage.getItem('scrubhubBookings') || '[]');
-                existingBookings.push(bookingData);
-                localStorage.setItem('scrubhubBookings', JSON.stringify(existingBookings));
+                // Send WhatsApp notification
+                sendWhatsAppNotification(bookingData);
                 
-                // Create a data URL for the PDF
-                const pdfDataUrl = pdf.output('datauristring');
+                // Clear form and show success
+                form.reset();
+                showSuccessNotification();
                 
-                // For now, simulate successful submission
-                // In production, you would integrate with a real email service
-                const response = { ok: true };
-                
-                // Log the booking data for debugging
-                console.log('Booking submitted:', bookingData);
-                console.log('PDF generated:', pdfDataUrl.substring(0, 100) + '...');
-                
-                if (response.ok) {
-                    // Clear all form fields
-                    form.reset();
-                    
-                    // Clear all visual feedback
-                    const inputs = form.querySelectorAll('input, select, textarea');
-                    inputs.forEach(input => {
-                        input.classList.remove('error');
-                        input.style.borderColor = '#e9ecef';
-                        input.style.backgroundColor = '#ffffff';
-                        input.style.transform = 'translateY(0)';
-                        input.style.boxShadow = 'none';
-                    });
-                    
-                    // Clear checkbox and radio button visual states
-                    const checkboxes = form.querySelectorAll('input[type="checkbox"]');
-                    const radioButtons = form.querySelectorAll('input[type="radio"]');
-                    
-                    checkboxes.forEach(checkbox => {
-                        const item = checkbox.closest('.checkbox-item');
-                        if (item) {
-                            item.style.transform = 'translateY(0)';
-                            item.style.boxShadow = 'none';
-                        }
-                    });
-                    
-                    radioButtons.forEach(radio => {
-                        const item = radio.closest('.radio-item');
-                        if (item) {
-                            item.style.transform = 'translateY(0)';
-                            item.style.boxShadow = 'none';
-                        }
-                    });
-                    
-                    // Clear all error messages
-                    const errorElements = form.querySelectorAll('.error-message');
-                    errorElements.forEach(el => {
-                        el.textContent = '';
-                        el.style.display = 'none';
-                    });
-                    
-                    // Reset date input to allow same day bookings
-                    const dateInput = document.getElementById('cleaning-date');
-                    const dateHelp = document.getElementById('date-help');
-                    if (dateInput) {
-                        const today = new Date().toISOString().split('T')[0];
-                        dateInput.value = today; // Set default to today
-                        dateInput.readOnly = false;
-                        dateInput.style.backgroundColor = '#ffffff';
-                        dateInput.style.cursor = 'pointer';
-                        // Reset help text
-                        if (dateHelp) {
-                            dateHelp.textContent = 'Same day bookings available!';
-                            dateHelp.style.color = '#6c757d';
-                            dateHelp.style.fontWeight = 'normal';
-                        }
-                        // No minimum date restriction - allows same day bookings
-                    }
-                    
-                    // Close modal
-                    document.getElementById('booking-modal').style.display = 'none';
-                    
-                    // Show success popup notification
-                    showSuccessNotification();
-                    
-                } else {
-                    throw new Error('Form submission failed');
-                }
+                // Close modal
+                document.getElementById('booking-modal').style.display = 'none';
                 
             } catch (error) {
-                console.error('Error submitting booking:', error);
+                console.error('Detailed error information:', error);
+                console.error('Error name:', error.name);
+                console.error('Error message:', error.message);
+                console.error('Error stack:', error.stack);
                 
-                // Show error message to user
-                alert('❌ There was an error submitting your booking. Please try again or contact us directly at info@scrubhubexpress.co.uk');
+                // Show more specific error message
+                let errorMessage = 'There was an error saving your booking. ';
                 
+                if (error.message.includes('Firebase is not loaded')) {
+                    errorMessage += 'Firebase is not loaded. Please check your internet connection.';
+                } else if (error.message.includes('permission')) {
+                    errorMessage += 'Permission denied. Please check Firebase security rules.';
+                } else if (error.message.includes('network')) {
+                    errorMessage += 'Network error. Please check your internet connection.';
+                } else {
+                    errorMessage += 'Please try again or contact us directly.';
+                }
+                
+                alert(errorMessage);
             } finally {
-                // Reset button state
                 submitButton.classList.remove('loading');
                 submitButton.disabled = false;
             }
         });
         </script>
 
-        <section class="why-choose">
+        <section class="why-choose animate-on-scroll">
             <h2>Why Choose ScrubHub Express</h2>
             <div class="why-icons-row">
-                <div class="why-icon-item">
+                <div class="why-icon-item animate-slide-left">
                     <div class="why-icon">⏱️</div>
                     <div class="why-label">Same Day Cleaning Available</div>
                 </div>
-                <div class="why-icon-item">
+                <div class="why-icon-item animate-slide-left">
                     <div class="why-icon">🛡️</div>
                     <div class="why-label">Vetted and Insured Cleaners</div>
                 </div>
-                <div class="why-icon-item">
+                <div class="why-icon-item animate-slide-left">
                     <div class="why-icon">💻</div>
                     <div class="why-label">Easy Online Booking</div>
                 </div>
-                <div class="why-icon-item">
+                <div class="why-icon-item animate-slide-left">
                     <div class="why-icon">💳</div>
                     <div class="why-label">Pay Online or Cash</div>
                 </div>
-                <div class="why-icon-item">
+                <div class="why-icon-item animate-slide-left">
                     <div class="why-icon">📍</div>
                     <div class="why-label">Local Hull-Based Team</div>
                 </div>
             </div>
         </section>
 
-        <section class="services" id="services">
-            <h3>Our Services</h3>
+        <section class="services animate-on-scroll" id="services">
+            <h2 id="services-heading">Our Services</h2>
             <div class="services-grid">
-                <a href="services.html" class="service-link">
-                    <div class="service-card">
-                        <div class="service-icon">🏠</div>
-                        <h4>Residential Cleaning</h4>
+                <a href="services.html" class="service-link" aria-label="Learn more about residential cleaning services">
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">🏠</div>
+                        <h3>Residential Cleaning</h3>
                         <p>Complete home cleaning services tailored to your needs</p>
-                    </div>
+                    </article>
                 </a>
-                <a href="services.html" class="service-link">
-                    <div class="service-card">
-                        <div class="service-icon">🏢</div>
-                        <h4>Commercial Cleaning</h4>
+                <a href="services.html" class="service-link" aria-label="Learn more about commercial cleaning services">
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">🏢</div>
+                        <h3>Commercial Cleaning</h3>
                         <p>Professional cleaning for offices and businesses</p>
-                    </div>
+                    </article>
                 </a>
-                <a href="services.html" class="service-link">
-                    <div class="service-card">
-                        <div class="service-icon">🧹</div>
-                        <h4>Deep Cleaning</h4>
+                <a href="services.html" class="service-link" aria-label="Learn more about deep cleaning services">
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">🧹</div>
+                        <h3>Deep Cleaning</h3>
                         <p>Thorough cleaning for special occasions or move-outs</p>
-                    </div>
+                    </article>
                 </a>
-                <a href="services.html" class="service-link">
-                    <div class="service-card">
-                        <div class="service-icon">⚡</div>
-                        <h4>Same Day Express Cleaning</h4>
+                <a href="services.html" class="service-link" aria-label="Learn more about same day express cleaning services">
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">⚡</div>
+                        <h3>Express Cleaning</h3>
                         <p>Get your space cleaned on the same day with our express service</p>
-                    </div>
+                    </article>
                 </a>
             </div>
         </section>
@@ -855,14 +747,14 @@ ${data.message || 'None provided'}
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>🏠 ScrubHub Express</h3>
+                <h3>ScrubHub Express</h3>
                 <p>Professional cleaning services for homes and businesses in Hull and surrounding areas. Fast, reliable, and eco-friendly.</p>
                 <p>📧 info@scrubhubexpress.co.uk</p>
                 <p>📞 +44 7442 850748</p>
             </div>
             
             <div class="footer-section">
-                <h3>🧹 Our Services</h3>
+                <h3>Our Services</h3>
                 <p><a href="services.html">Residential Cleaning</a></p>
                 <p><a href="services.html">Commercial Cleaning</a></p>
                 <p><a href="services.html">Deep Cleaning</a></p>
@@ -870,7 +762,7 @@ ${data.message || 'None provided'}
             </div>
             
             <div class="footer-section">
-                <h3>📍 Service Areas</h3>
+                <h3>Service Areas</h3>
                 <p>Hull City Centre</p>
                 <p>East Hull</p>
                 <p>West Hull</p>
@@ -879,7 +771,7 @@ ${data.message || 'None provided'}
             </div>
             
             <div class="footer-section">
-                <h3>💬 Quick Contact</h3>
+                <h3>Quick Contact</h3>
                 <p><a href="https://wa.me/447442850748" target="_blank">WhatsApp Us</a></p>
                 <p><a href="mailto:info@scrubhubexpress.co.uk">Email Us</a></p>
                 <p><a href="#" id="footer-call-link">Call Now</a></p>
@@ -887,7 +779,7 @@ ${data.message || 'None provided'}
             </div>
             
             <div class="footer-section">
-                <h3>📱 Follow Us</h3>
+                <h3>Follow Us</h3>
                 <div class="social-links">
                     <a href="https://www.facebook.com/share/1EenSjNNDb/?mibextid=wwXIfr" target="_blank" class="social-link">
                         <svg class="social-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -903,7 +795,7 @@ ${data.message || 'None provided'}
                     </a>
                     <a href="https://www.tiktok.com/@scrubhub_express?_t=ZN-8xnvwwwHViR&_r=1" target="_blank" class="social-link">
                         <svg class="social-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.35-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.7-1.35 3.85-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.35-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
                         </svg>
                         <span>TikTok</span>
                     </a>
@@ -998,6 +890,102 @@ ${data.message || 'None provided'}
                 }
             }, 5000);
         }
+
+        // Scroll animation for Why Choose ScrubHub section
+        function animateWhyChooseSection() {
+            const whyChooseSection = document.querySelector('.why-choose');
+            const whyIconItems = document.querySelectorAll('.why-icon-item');
+            
+            if (!whyChooseSection || whyIconItems.length === 0) return;
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        whyIconItems.forEach(item => {
+                            item.classList.add('animate');
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            observer.observe(whyChooseSection);
+        }
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuF2aGtz2Fv9IcHGLsYv4tbLcnEuEKTJw",
+            authDomain: "scrubhub-express.firebaseapp.com",
+            projectId: "scrubhub-express",
+            storageBucket: "scrubhub-express.firebasestorage.app",
+            messagingSenderId: "499298029950",
+            appId: "1:499298029950:web:72ea0b26aab7721d16232f",
+            measurementId: "G-FFG7QBREZP"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Initialize scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            animateWhyChooseSection();
+            
+            // Initialize booking form
+            initializeBookingForm();
+        });
+
+        // Initialize booking form with Firebase
+        function initializeBookingForm() {
+            const bookingForm = document.getElementById('booking-form');
+            if (!bookingForm) return;
+
+            // The form submission is already handled by the main event listener
+            // No need to add another one here
+        }
+
+        // Generate PDF with booking ID
+        function generatePDF(bookingData, bookingId) {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+            
+            // Add booking ID
+            pdf.setFontSize(16);
+            pdf.text(`Booking ID: ${bookingId}`, 20, 20);
+            
+            // Rest of PDF generation...
+            pdf.setFontSize(12);
+            pdf.text(`Service: ${bookingData.serviceType}`, 20, 40);
+            pdf.text(`Date: ${bookingData.cleaningDate}`, 20, 50);
+            pdf.text(`Address: ${bookingData.address}`, 20, 60);
+            pdf.text(`Name: ${bookingData.name}`, 20, 70);
+            pdf.text(`Phone: ${bookingData.phone}`, 20, 80);
+            pdf.text(`Email: ${bookingData.email}`, 20, 90);
+            
+            // Save PDF
+            pdf.save(`scrubhub-booking-${bookingId}.pdf`);
+        }
+
+        // Send WhatsApp notification
+        function sendWhatsAppNotification(bookingData) {
+            const message = `New Booking Received!%0A%0A` +
+                `Service: ${bookingData.serviceType}%0A` +
+                `Date: ${bookingData.cleaningDate}%0A` +
+                `Address: ${bookingData.address}%0A` +
+                `Name: ${bookingData.name}%0A` +
+                `Phone: ${bookingData.phone}%0A` +
+                `Email: ${bookingData.email}%0A` +
+                `Payment: ${bookingData.payment}%0A` +
+                `Extras: ${bookingData.extras.join(', ')}%0A` +
+                `Message: ${bookingData.message || 'None'}`;
+            
+            window.open(`https://wa.me/447442850748?text=${message}`, '_blank');
+        }
+        
+
     </script>
 </body>
 </html>
