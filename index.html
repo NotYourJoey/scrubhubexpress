@@ -40,8 +40,7 @@
     <link rel="canonical" href="https://scrubhubexpress.co.uk/">
     
             <!-- Favicon -->
-        <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-        <link rel="icon" type="image/svg+xml" href="images/favicon-logo.svg">
+        <link rel="icon" type="image/png" href="images/she-favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     
     <!-- Preload critical resources -->
@@ -166,23 +165,16 @@
     <header class="header">
         <nav class="nav">
             <div class="nav-brand">
+                <span>✨</span>
                 <img src="images/she-logo.jpg" alt="ScrubHub Express Logo" class="header-logo" />
-                <span class="header-logo-sparkle sparkle-1">
-                  <svg viewBox="0 0 20 20" fill="none"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffe066"/></svg>
-                </span>
-                <span class="header-logo-sparkle sparkle-2">
-                  <svg viewBox="0 0 16 16" fill="none"><path d="M8 0 L9 6 L16 8 L9 10 L8 16 L7 10 L0 8 L7 6 Z" fill="#fff9b2"/></svg>
-                </span>
-                <span class="header-logo-sparkle sparkle-3">
-                  <svg viewBox="0 0 14 14" fill="none"><path d="M7 0 L8 5 L14 7 L8 9 L7 14 L6 9 L0 7 L6 5 Z" fill="#fffbe6"/></svg>
-                </span>
-                <span class="header-logo-sparkle sparkle-4">
-                  <svg viewBox="0 0 10 10" fill="none"><path d="M5 0 L6 3 L10 5 L6 7 L5 10 L4 7 L0 5 L4 3 Z" fill="#fffde7"/></svg>
-                </span>
                 <h1>ScrubHub Express</h1>
+                <span>✨</span>
             </div>
+
+            <button class="menu-btn" id="menu-btn">Menu</button>
+
             <ul class="nav-menu">
-                <li><a href="index.html" onclick="scrollToTop()">Home</a></li>
+                <li><a href="/" onclick="scrollToTop()">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="about.html">About</a></li>
                 <li class="dropdown">
@@ -810,6 +802,31 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Simple mobile menu toggle
+      const navMenu = document.querySelector('.nav-menu');
+      const menuBtn = document.getElementById('menu-btn');
+      
+      if (menuBtn && navMenu) {
+        menuBtn.addEventListener('click', function() {
+          navMenu.classList.toggle('show');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+          if (!menuBtn.contains(event.target) && !navMenu.contains(event.target)) {
+            navMenu.classList.remove('show');
+          }
+        });
+      }
+      
+      // Home navigation on logo/name click
+      const navBrand = document.querySelector('.nav-brand');
+      if (navBrand) {
+        navBrand.addEventListener('click', function() {
+          window.location.href = '/';
+        });
+      }
+
       // Navigation dropdown call link
       var callLink = document.getElementById('call-us-link');
       if (callLink) {
@@ -843,24 +860,24 @@
           modal.style.display = 'flex';
         });
       }
-            });
-        
-        // Footer call link
-        var footerCallLink = document.getElementById('footer-call-link');
-        if (footerCallLink) {
-            footerCallLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                let modal = document.getElementById('call-modal');
-                if (!modal) {
-                    modal = document.createElement('div');
-                    modal.id = 'call-modal';
-                    modal.className = 'popup-modal';
-                    modal.innerHTML = `<div class='popup-modal-content'><button class='popup-modal-close' onclick="document.getElementById('call-modal').style.display='none'">&times;</button><div>Call us at <br><strong>+44 7442 850748</strong></div></div>`;
-                    document.body.appendChild(modal);
-                }
-                modal.style.display = 'flex';
-            });
-        }
+      
+      // Footer call link
+      var footerCallLink = document.getElementById('footer-call-link');
+      if (footerCallLink) {
+          footerCallLink.addEventListener('click', function(e) {
+              e.preventDefault();
+              let modal = document.getElementById('call-modal');
+              if (!modal) {
+                  modal = document.createElement('div');
+                  modal.id = 'call-modal';
+                  modal.className = 'popup-modal';
+                  modal.innerHTML = `<div class='popup-modal-content'><button class='popup-modal-close' onclick="document.getElementById('call-modal').style.display='none'">&times;</button><div>Call us at <br><strong>+44 7442 850748</strong></div></div>`;
+                  document.body.appendChild(modal);
+              }
+              modal.style.display = 'flex';
+          });
+      }
+    });
         
         // Success notification function
         function showSuccessNotification() {

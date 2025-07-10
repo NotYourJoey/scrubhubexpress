@@ -6,8 +6,7 @@
     <title>ScrubHub Express - Admin Panel</title>
     
             <!-- Favicon -->
-        <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
-        <link rel="icon" type="image/svg+xml" href="images/favicon-logo.svg">
+        <link rel="icon" type="image/png" href="images/she-favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     
     <link rel="stylesheet" href="styles.css?v=1.1">
@@ -569,24 +568,76 @@
             const pdf = new jsPDF('p', 'mm', 'a4');
             
             // Set up colors
-            const primaryColor = [42, 82, 152]; // #2a5298
-            const accentColor = [79, 172, 254]; // #4facfe
+            const primaryColor = [42, 82, 152]; // Brand primary (#2a5298)
+            const accentColor = [79, 172, 254]; // Brand accent (#4facfe)
             const textColor = [51, 51, 51]; // #333
             const lightGray = [128, 128, 128]; // #808080
+            // Load company logo (natural image) and prepare watermark
+            let logoDataUrl = null;
+            let watermarkDataUrl = null;
+            // Header logo dimensions
+            let headerWidth = 35; // mm
+            let headerHeight = 20; // default placeholder, updated after image loads
+            try {
+                const response = await fetch('images/she-logo.jpg');
+                const blob = await response.blob();
+
+                // Data URL for original image (keeps fidelity)
+                logoDataUrl = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.readAsDataURL(blob);
+                });
+
+                // Bitmap for ratio & watermark
+                const imgBitmap = await createImageBitmap(blob);
+                headerHeight = (imgBitmap.height / imgBitmap.width) * headerWidth;
+                 
+                // Watermark logo (large, semi-transparent)
+                const wmSize = 250;
+                const wmCanvas = document.createElement('canvas');
+                wmCanvas.width = wmSize;
+                wmCanvas.height = wmSize;
+                const wmCtx = wmCanvas.getContext('2d');
+                wmCtx.globalAlpha = 0.05; // 5% opacity
+                wmCtx.drawImage(imgBitmap, 0, 0, wmSize, wmSize);
+                watermarkDataUrl = wmCanvas.toDataURL('image/png');
+            } catch (e) {
+                console.error('Failed to load company logo:', e);
+            }
             
             // Header with logo and company info
-            pdf.setFillColor(...primaryColor);
-            pdf.rect(0, 0, 210, 40, 'F');
-            
-            // Company name
-            pdf.setTextColor(255, 255, 255);
-            pdf.setFontSize(24);
-            pdf.setFont('helvetica', 'bold');
-            pdf.text('ScrubHub Express', 20, 25);
-            
-            // Receipt title
-            pdf.setFontSize(18);
-            pdf.text('OFFICIAL RECEIPT', 150, 25);
+            pdf.setFillColor(255, 255, 255); // white header
+            pdf.rect(0, 0, 210, 45, 'F');
+            pdf.setDrawColor(...accentColor);
+            pdf.setLineWidth(0.5);
+            pdf.line(10, 45, 200, 45); // bottom border
+
+            // Add natural logo image to the header (crisp)
+            if (logoDataUrl) {
+                pdf.addImage(logoDataUrl, 'JPEG', 15, 8, headerWidth, headerHeight);
+            }
+
+            // Company name (Times Bold for formal look)
+            pdf.setTextColor(...primaryColor);
+            pdf.setFontSize(22);
+            pdf.setFont('times', 'bold');
+            pdf.text('ScrubHub Express', 105, 25, { align: 'center' });
+
+            // Receipt title centered beneath company name
+            pdf.setFontSize(14);
+            pdf.setFont('times', 'bold');
+            pdf.text('OFFICIAL RECEIPT', 105, 35, { align: 'center' });
+
+            // Watermark logo in the center of the page
+            if (typeof watermarkDataUrl !== 'undefined' && watermarkDataUrl) {
+                // Smaller watermark (120x120) centered horizontally
+                const wmWidth = 120;
+                const wmHeight = 120;
+                const wmX = (210 - wmWidth) / 2; // center horizontally on A4 width 210 mm
+                const wmY = 85; // slightly below header
+                pdf.addImage(watermarkDataUrl, 'PNG', wmX, wmY, wmWidth, wmHeight);
+            }
             
             // Receipt details box
             pdf.setFillColor(248, 249, 250); // Light gray background
@@ -601,19 +652,19 @@
             pdf.setTextColor(...textColor);
             pdf.setFontSize(10);
             pdf.setFont('helvetica', 'bold');
-            pdf.text('Receipt Number:', 15, 60);
+            pdf.text('Receipt Number:', 20, 60);
             pdf.setFont('helvetica', 'normal');
-            pdf.text(receiptNumber, 50, 60);
+            pdf.text(receiptNumber, 60, 60);
             
             pdf.setFont('helvetica', 'bold');
-            pdf.text('Receipt Date:', 15, 70);
+            pdf.text('Receipt Date:', 20, 70);
             pdf.setFont('helvetica', 'normal');
-            pdf.text(currentDate, 50, 70);
+            pdf.text(currentDate, 60, 70);
             
             pdf.setFont('helvetica', 'bold');
             pdf.text('Service Date:', 120, 60);
             pdf.setFont('helvetica', 'normal');
-            pdf.text(booking.cleaningDate, 155, 60);
+            pdf.text(booking.cleaningDate, 150, 60);
             
             // Customer Information Section
             pdf.setFillColor(...accentColor);
@@ -621,7 +672,7 @@
             pdf.setTextColor(255, 255, 255);
             pdf.setFontSize(12);
             pdf.setFont('helvetica', 'bold');
-            pdf.text('CUSTOMER INFORMATION', 15, 96);
+            pdf.text('Customer Information', 15, 96);
             
             pdf.setTextColor(...textColor);
             pdf.setFontSize(10);
@@ -650,7 +701,7 @@
             pdf.setTextColor(255, 255, 255);
             pdf.setFontSize(12);
             pdf.setFont('helvetica', 'bold');
-            pdf.text('SERVICE LOCATION', 120, 96);
+            pdf.text('Service Location', 120, 96);
             
             pdf.setTextColor(...textColor);
             pdf.setFontSize(10);
@@ -668,7 +719,7 @@
             pdf.setTextColor(255, 255, 255);
             pdf.setFontSize(12);
             pdf.setFont('helvetica', 'bold');
-            pdf.text('SERVICE DETAILS', 15, 156);
+            pdf.text('Service Details', 15, 156);
             
             // Service details with modern layout
             pdf.setFillColor(248, 249, 250);
@@ -691,13 +742,15 @@
             pdf.text(serviceType, 50, 185);
             
             pdf.text('Payment:', 15, 195);
-            pdf.text(booking.payment, 50, 195);
+            const paymentMethod = booking.payment.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+            pdf.text(paymentMethod, 50, 195);
             
             // Additional services within the box
             if (booking.extras && booking.extras.length > 0) {
                 pdf.text('Extras:', 15, 205);
                 pdf.setFontSize(9);
-                const extrasLines = pdf.splitTextToSize(booking.extras.join(', '), 150);
+                const extrasTitleCase = booking.extras.map(e => e.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' '));
+                const extrasLines = pdf.splitTextToSize(extrasTitleCase.join(', '), 150);
                 pdf.text(extrasLines, 50, 205);
             }
             
@@ -708,7 +761,7 @@
                 pdf.setTextColor(255, 255, 255);
                 pdf.setFontSize(12);
                 pdf.setFont('helvetica', 'bold');
-                pdf.text('PAYMENT DETAILS', 15, 241);
+                pdf.text('Payment Details', 15, 241);
                 
                 pdf.setTextColor(...textColor);
                 pdf.setFontSize(10);
@@ -720,7 +773,7 @@
                 pdf.setFont('helvetica', 'normal');
                 pdf.text('Payment Method:', 15, 265);
                             pdf.setFont('helvetica', 'bold');
-            pdf.text(booking.payment, 50, 265);
+            pdf.text(paymentMethod, 50, 265);
             }
             
             // Additional Information Section
@@ -731,7 +784,7 @@
                 pdf.setTextColor(255, 255, 255);
                 pdf.setFontSize(12);
                 pdf.setFont('helvetica', 'bold');
-                pdf.text('ADDITIONAL INFORMATION', 15, startY + 6);
+                pdf.text('Additional Information', 15, startY + 6);
                 
                 pdf.setTextColor(...textColor);
                 pdf.setFontSize(10);
