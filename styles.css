@@ -218,7 +218,7 @@ body {
     top: 100%;
     left: 0;
     min-width: 180px;
-    background: var(--oxford-blue) !important;
+    background: white !important;
     border-radius: 10px;
     box-shadow: 0 4px 16px rgba(0,33,71,0.25);
     padding: 0.5rem 0;
@@ -241,7 +241,7 @@ body {
     display: block;
     width: 100%;
     padding: 0.7rem 1.2rem;
-    color: white !important;
+    color: var(--oxford-blue) !important;
     text-decoration: none;
     font-weight: 500;
     transition: background 0.18s, color 0.18s, box-shadow 0.18s;
@@ -250,8 +250,8 @@ body {
 
 .dropdown-menu a:hover,
 .dropdown-menu a:focus {
-    background: rgba(255,255,255,0.2) !important;
-    color: white !important;
+    background: rgba(0,33,71,0.1) !important;
+    color: var(--oxford-blue) !important;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
@@ -263,14 +263,14 @@ body {
 
 .dropdown-menu,
 .dropdown-menu * {
-    background: var(--oxford-blue) !important;
+    background: white !important;
 }
 
 .dropdown-menu a,
 .dropdown-menu a:hover,
 .dropdown-menu a:focus,
 .dropdown-menu a:visited {
-    color: white !important;
+    color: var(--oxford-blue) !important;
 }
 
 .nav-menu a {
@@ -325,10 +325,9 @@ body {
 
 /* Main Content */
 .main {
-    max-width: 95%;
-    margin: 0 auto;
-    padding: 0 2rem;
-
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -570,6 +569,8 @@ body {
     position: relative;
     overflow: hidden;
     letter-spacing: 0.5px;
+    width: 100%;
+    max-width: 300px;
 }
 
 .cta-button::before {
@@ -605,9 +606,8 @@ body {
     text-align: center;
     position: relative;
     border-radius: 24px;
-    margin: 2rem auto;
-    width: 95%;
-    max-width: 1200px;
+    margin: 2rem 0;
+    width: 100%;
     box-shadow: 
         0 8px 32px rgba(0,33,71,0.1),
         0 0 0 1px rgba(230,177,122,0.1);
@@ -1260,10 +1260,12 @@ body {
         flex-direction: column;
         align-items: center;
         gap: 1rem;
+        width: 100%;
     }
     
     .cta-btn {
-        width: 200px;
+        width: 100%;
+        max-width: 280px;
         padding: 1rem 1.5rem;
     }
 }
@@ -1364,7 +1366,8 @@ body {
     }
     
     .cta-btn {
-        width: 180px;
+        width: 100%;
+        max-width: 260px;
         padding: 0.8rem 1.2rem;
     }
     
@@ -1450,7 +1453,8 @@ body {
     }
     
     .cta-btn {
-        width: 160px;
+        width: 100%;
+        max-width: 240px;
         padding: 0.7rem 1rem;
     }
 }
@@ -1580,9 +1584,8 @@ body {
     padding: 3rem 0 2.5rem 0;
     text-align: center;
     border-radius: 24px;
-    margin: 2rem auto;
-    width: 95%;
-    max-width: 1200px;
+    margin: 2rem 0;
+    width: 100%;
     box-shadow: 
         0 8px 32px rgba(0,33,71,0.1),
         0 0 0 1px rgba(230,177,122,0.1);
@@ -2584,6 +2587,7 @@ body {
     justify-content: center;
     gap: 1.5rem;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .cta-btn {
@@ -2599,6 +2603,8 @@ body {
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     min-width: 140px;
+    flex: 1;
+    max-width: 300px;
     font-weight: 600;
     border: 2px solid transparent;
     position: relative;
@@ -2633,10 +2639,13 @@ body {
     }
     .cta-buttons {
         gap: 1rem;
+        width: 100%;
     }
     .cta-btn {
         min-width: 120px;
         padding: 1rem 1.2rem;
+        flex: 1;
+        max-width: 250px;
     }
     .cta-icon {
         font-size: 1.5rem;
@@ -2647,9 +2656,11 @@ body {
     .cta-buttons {
         flex-direction: column;
         align-items: center;
+        width: 100%;
     }
     .cta-btn {
-        width: 200px;
+        width: 100%;
+        max-width: 280px;
     }
 }
 
@@ -2773,6 +2784,8 @@ body {
     .cta-button {
         font-size: 0.95rem;
         padding: 0.8rem 1.5rem;
+        width: 100%;
+        max-width: 250px;
     }
     .cta-btn {
         font-size: 0.95rem;
@@ -2789,6 +2802,8 @@ body {
     .cta-button {
         font-size: 0.85rem;
         padding: 0.7rem 1.1rem;
+        width: 100%;
+        max-width: 220px;
     }
     .cta-btn {
         font-size: 0.85rem;
@@ -2805,6 +2820,8 @@ body {
     .cta-button {
         font-size: 0.75rem;
         padding: 0.6rem 0.8rem;
+        width: 100%;
+        max-width: 180px;
     }
     .cta-btn {
         font-size: 0.75rem;
