@@ -618,15 +618,23 @@
                 pdf.addImage(logoDataUrl, 'JPEG', 15, 8, headerWidth, headerHeight);
             }
 
-            // Company name (Times Bold for formal look)
+            // Company name (Copperplate for formal look)
             pdf.setTextColor(...primaryColor);
             pdf.setFontSize(22);
-            pdf.setFont('times', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text('ScrubHub Express', 105, 25, { align: 'center' });
+
+            // Company contact info on the right
+            pdf.setFontSize(9);
+            pdf.setFont('Copperplate', 'normal');
+            pdf.text('44 Portland St.', 160, 15);
+            pdf.text('Hull, HU2 8JX', 160, 20);
+            pdf.text('info@scrubhubexpress.co.uk', 160, 25);
+            pdf.text('+44 7442 850748', 160, 30);
 
             // Receipt title centered beneath company name
             pdf.setFontSize(14);
-            pdf.setFont('times', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text('OFFICIAL RECEIPT', 105, 35, { align: 'center' });
 
             // Watermark logo in the center of the page
@@ -651,19 +659,19 @@
             
             pdf.setTextColor(...textColor);
             pdf.setFontSize(10);
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text('Receipt Number:', 20, 60);
-            pdf.setFont('helvetica', 'normal');
+            pdf.setFont('Copperplate', 'normal');
             pdf.text(receiptNumber, 60, 60);
             
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text('Receipt Date:', 20, 70);
-            pdf.setFont('helvetica', 'normal');
+            pdf.setFont('Copperplate', 'normal');
             pdf.text(currentDate, 60, 70);
             
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text('Service Date:', 120, 60);
-            pdf.setFont('helvetica', 'normal');
+            pdf.setFont('Copperplate', 'normal');
             pdf.text(booking.cleaningDate, 150, 60);
             
             // Customer Information Section
@@ -671,28 +679,28 @@
             pdf.rect(10, 90, 95, 8, 'F');
             pdf.setTextColor(255, 255, 255);
             pdf.setFontSize(12);
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text('Customer Information', 15, 96);
             
             pdf.setTextColor(...textColor);
             pdf.setFontSize(10);
-            pdf.setFont('helvetica', 'normal');
+            pdf.setFont('Copperplate', 'normal');
             pdf.text('Name:', 15, 110);
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             // Properly capitalize the customer name
             const customerName = booking.name.split(' ').map(word => 
                 word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
             ).join(' ');
             pdf.text(customerName, 50, 110);
             
-            pdf.setFont('helvetica', 'normal');
+            pdf.setFont('Copperplate', 'normal');
             pdf.text('Email:', 15, 120);
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text(booking.email, 50, 120);
             
-            pdf.setFont('helvetica', 'normal');
+            pdf.setFont('Copperplate', 'normal');
             pdf.text('Phone:', 15, 130);
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text(booking.phone, 50, 130);
             
             // Service Location Section
@@ -700,14 +708,14 @@
             pdf.rect(115, 90, 85, 8, 'F');
             pdf.setTextColor(255, 255, 255);
             pdf.setFontSize(12);
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text('Service Location', 120, 96);
             
             pdf.setTextColor(...textColor);
             pdf.setFontSize(10);
-            pdf.setFont('helvetica', 'normal');
+            pdf.setFont('Copperplate', 'normal');
             pdf.text('Address:', 120, 110);
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             
             // Split address into multiple lines if needed
             const addressLines = pdf.splitTextToSize(booking.address, 70);
@@ -718,7 +726,7 @@
             pdf.rect(10, 150, 190, 8, 'F');
             pdf.setTextColor(255, 255, 255);
             pdf.setFontSize(12);
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text('Service Details', 15, 156);
             
             // Service details with modern layout
@@ -730,10 +738,10 @@
             // Service information
             pdf.setTextColor(...textColor);
             pdf.setFontSize(10);
-            pdf.setFont('helvetica', 'bold');
+            pdf.setFont('Copperplate', 'bold');
             pdf.text('Service Details:', 15, 175);
             
-            pdf.setFont('helvetica', 'normal');
+            pdf.setFont('Copperplate', 'normal');
             pdf.text('Type:', 15, 185);
             // Properly capitalize service type
             const serviceType = booking.serviceType.split(' ').map(word => 
@@ -760,19 +768,19 @@
                 pdf.rect(10, 235, 190, 8, 'F');
                 pdf.setTextColor(255, 255, 255);
                 pdf.setFontSize(12);
-                pdf.setFont('helvetica', 'bold');
+                pdf.setFont('Copperplate', 'bold');
                 pdf.text('Payment Details', 15, 241);
                 
                 pdf.setTextColor(...textColor);
                 pdf.setFontSize(10);
-                pdf.setFont('helvetica', 'normal');
+                pdf.setFont('Copperplate', 'normal');
                 pdf.text('Total Amount:', 15, 255);
-                pdf.setFont('helvetica', 'bold');
+                pdf.setFont('Copperplate', 'bold');
                 pdf.text(`£${booking.amount.toFixed(2)}`, 50, 255);
                 
-                pdf.setFont('helvetica', 'normal');
+                pdf.setFont('Copperplate', 'normal');
                 pdf.text('Payment Method:', 15, 265);
-                            pdf.setFont('helvetica', 'bold');
+                            pdf.setFont('Copperplate', 'bold');
             pdf.text(paymentMethod, 50, 265);
             }
             
@@ -783,28 +791,45 @@
                 pdf.rect(10, startY, 190, 8, 'F');
                 pdf.setTextColor(255, 255, 255);
                 pdf.setFontSize(12);
-                pdf.setFont('helvetica', 'bold');
+                pdf.setFont('Copperplate', 'bold');
                 pdf.text('Additional Information', 15, startY + 6);
                 
                 pdf.setTextColor(...textColor);
                 pdf.setFontSize(10);
-                pdf.setFont('helvetica', 'normal');
+                pdf.setFont('Copperplate', 'normal');
                 const messageLines = pdf.splitTextToSize(booking.message, 180);
                 pdf.text(messageLines, 15, startY + 20);
             }
             
-            // Footer with modern layout
-            const footerY = (booking.amount && booking.amount > 0) && (booking.message && booking.message !== 'None') ? 335 : 285;
+            // Footer
+            const footerY = pdf.internal.pageSize.height - 30;
+
+            // Thank you bar background
             pdf.setFillColor(...primaryColor);
-            pdf.rect(0, footerY, 210, 30, 'F');
-            
+            pdf.rect(0, footerY - 5, 210, 30, 'F');
+
+            // Content in thank you bar
+            pdf.setFontSize(7);
+            pdf.setFont('Copperplate', 'normal');
+
+            // First row - Thank you and contact
             pdf.setTextColor(255, 255, 255);
-            pdf.setFontSize(10);
-            pdf.setFont('helvetica', 'normal');
-            pdf.text('Thank you for choosing ScrubHub Express!', 105, footerY + 10, { align: 'center' });
-            pdf.setFontSize(8);
-            pdf.text(`Receipt generated on ${new Date().toLocaleString()}`, 105, footerY + 20, { align: 'center' });
-            pdf.text('📧 info@scrubhubexpress.co.uk | 📞 +44 7442 850748', 105, footerY + 30, { align: 'center' });
+            pdf.text('Thank you for choosing ScrubHub Express!', 105, footerY + 2, { align: 'center' });
+            //pdf.text('info@scrubhubexpress.co.uk || +44 7442 850748', 105, footerY + 7, { align: 'center' });
+
+            // Second row - Company registration
+            pdf.text('SCRUBHUB EXPRESS LTD | REGISTERED IN ENGLAND AND WALES NO. 16574830', 105, footerY + 12, { align: 'center' });
+            //pdf.text('44 PORTLAND ST. HU2 8JX, HULL, UK', 105, footerY + 17, { align: 'center' });
+
+            // Generation timestamp
+            //pdf.setFontSize(6);
+            //pdf.text(`Generated: ${new Date().toLocaleString()}`, 105, footerY + 22, { align: 'center' });
+            
+            // Receipt generation timestamp
+            //pdf.setFontSize(8);
+            //pdf.setTextColor(...lightGray);
+            //pdf.text(`Receipt generated on ${new Date().toLocaleString()}`, 105, footerY + 28, { align: 'center' });
+            //pdf.text('📧 info@scrubhubexpress.co.uk | 📞 +44 7442 850748', 105, footerY + 30, { align: 'center' });
             
             // Download the PDF
             const filename = `ScrubHub_Receipt_${receiptNumber}.pdf`;
