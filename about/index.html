@@ -66,6 +66,12 @@
     }
     </script>
     <style>
+        /* Override hero background for about page */
+        .hero {
+            background: url('../images/hero-bg-2.jpeg') !important;
+            background-size: cover !important;
+            background-position: center !important;
+        }
         .about-section {
             max-width: 95%;
             margin: 3rem auto 2rem auto;
@@ -231,9 +237,9 @@
             <div class="footer-section">
                 <h3>SCRUBHUB EXPRESS</h3>
                 <p>Professional cleaning services for homes and businesses in Hull and surrounding areas. Fast, reliable, and eco-friendly.</p>
-                <p>📍 44 Portland Street, Hull, HU2 8JX, UK</p>
-                <p>📧 info@scrubhubexpress.co.uk</p>
-                <p>📞 +44 7442 850748</p>
+                <p><a href="https://maps.google.com/?q=44+Portland+Street,+Hull,+HU2+8JX,+UK" target="_blank" title="Open in Google Maps">📍 44 Portland Street, Hull, HU2 8JX, UK</a></p>
+                <p><a href="mailto:info@scrubhubexpress.co.uk" title="Send us an email">📧 info@scrubhubexpress.co.uk</a></p>
+                <p><a href="tel:+447442850748" title="Call us">📞 +44 7442 850748</a></p>
             </div>
             
             <div class="footer-section">
@@ -313,30 +319,53 @@
     </script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-              // Simple mobile menu toggle
-      const navMenu = document.querySelector('.nav-menu');
-      const menuBtn = document.getElementById('menu-btn');
-      
-      if (menuBtn && navMenu) {
-        menuBtn.addEventListener('click', function() {
-          navMenu.classList.toggle('show');
+        // Simple mobile menu toggle
+        const navMenu = document.querySelector('.nav-menu');
+        const menuBtn = document.getElementById('menu-btn');
+        const dropdownLinks = document.querySelectorAll('.dropdown > a');
+        
+        if (menuBtn && navMenu) {
+            menuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('show');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!menuBtn.contains(event.target) && !navMenu.contains(event.target)) {
+                    navMenu.classList.remove('show');
+                    // Close all dropdowns
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            });
+        }
+        
+        // Handle dropdown toggles on mobile
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const dropdown = this.parentElement;
+                    dropdown.classList.toggle('active');
+                    
+                    // Close other dropdowns
+                    dropdownLinks.forEach(otherLink => {
+                        if (otherLink !== this) {
+                            otherLink.parentElement.classList.remove('active');
+                        }
+                    });
+                }
+            });
         });
         
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-          if (!menuBtn.contains(event.target) && !navMenu.contains(event.target)) {
-            navMenu.classList.remove('show');
-          }
-        });
-      }
-      
-      // Home navigation on logo/name click
-      const navBrand = document.querySelector('.nav-brand');
-      if (navBrand) {
-        navBrand.addEventListener('click', function() {
-          window.location.href = '/';
-        });
-      }
+        // Home navigation on logo/name click
+        const navBrand = document.querySelector('.nav-brand');
+        if (navBrand) {
+            navBrand.addEventListener('click', function() {
+                window.location.href = '/';
+            });
+        }
     });
     </script>
 </body>

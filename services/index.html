@@ -101,61 +101,325 @@
     </script>
     <style>
         .services-detail {
-            max-width: 95%;
-            margin: 3rem auto 2rem auto;
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.95) 0%, 
-                rgba(230,177,122,0.1) 25%, 
-                rgba(0,33,71,0.05) 50%, 
-                rgba(210,105,30,0.08) 75%, 
-                rgba(255,255,255,0.98) 100%);
-            border-radius: 24px;
-            box-shadow: 
-                0 8px 32px rgba(0,33,71,0.1),
-                0 0 0 1px rgba(230,177,122,0.1);
-            padding: 2.5rem 2rem;
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
         }
-        .services-detail h1 {
-            color: #2a5298;
+        
+        .service-detail-block {
+            background: linear-gradient(145deg, #ffffff, #f3f3f3);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 33, 71, 0.1);
+            box-shadow: 
+                0 10px 30px rgba(0, 33, 71, 0.1),
+                0 1px 3px rgba(0, 33, 71, 0.05);
+        }
+
+        .service-detail-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--caramel-primary), var(--oxford-blue));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-detail-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 40px rgba(0, 33, 71, 0.15),
+                0 1px 5px rgba(0, 33, 71, 0.1);
+        }
+
+        .service-detail-block:hover::before {
+            opacity: 1;
+        }
+        
+        .service-detail-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--oxford-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+        }
+        
+        .service-detail-icon {
             font-size: 2.5rem;
+            color: var(--caramel-primary);
+            text-shadow: 0 2px 10px rgba(198, 142, 23, 0.3);
+        }
+
+        .service-detail-features {
+            margin: 1.5rem 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .service-detail-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-icon {
+            color: var(--oxford-blue);
+            font-size: 1.2rem;
+        }
+        
+        .service-detail-desc {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-cta {
+            margin-top: 2rem;
+            text-align: right;
+        }
+
+        .service-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--oxford-blue);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .service-cta-btn:hover {
+            background: white;
+            color: var(--oxford-blue);
+            border-color: var(--oxford-blue);
+        }
+
+        @media (max-width: 768px) {
+            .services-detail {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+                gap: 1.5rem;
+            }
+            
+            .service-detail-block {
+                padding: 2rem;
+            }
+            
+            .service-detail-title {
+                font-size: 1.8rem;
+            }
+            
+            .service-detail-icon {
+                font-size: 2rem;
+            }
+
+            .service-detail-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-detail {
+                margin: 2rem auto;
+            }
+            
+            .service-detail-block {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+            
+            .service-detail-title {
+                font-size: 1.5rem;
+            }
+            
+            .service-detail-desc {
+                font-size: 1rem;
+            }
+        }
+
+        /* Booking Modal Styles */
+        .popup-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 33, 71, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .booking-form-container {
+            max-width: 800px;
+            width: 100%;
+            background: linear-gradient(145deg, #ffffff, #f3f3f3);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 33, 71, 0.25);
+            padding: 3rem;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: auto;
+            max-height: 90vh;
+        }
+
+        .popup-modal-close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--oxford-blue);
+            cursor: pointer;
+            padding: 0.5rem;
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+
+        .popup-modal-close:hover {
+            transform: rotate(90deg);
+            color: var(--caramel-primary);
+        }
+
+        .booking-form-container h2 {
+            color: var(--oxford-blue);
+            font-size: 2rem;
             margin-bottom: 2rem;
             text-align: center;
         }
-        .service-detail-block {
-            margin-bottom: 2.5rem;
+
+        .form-group {
+            margin-bottom: 1.5rem;
         }
-        .service-detail-block:last-child {
-            margin-bottom: 0;
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--oxford-blue);
+            font-weight: 600;
         }
-        .service-detail-title {
-            font-size: 1.5rem;
-            color: #4facfe;
-            margin-bottom: 0.7rem;
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid rgba(0, 33, 71, 0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            color: var(--text-dark);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--oxford-blue);
+            box-shadow: 0 0 0 3px rgba(0, 33, 71, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, var(--oxford-blue), var(--caramel-primary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 0.7rem;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
         }
-        .service-detail-icon {
-            font-size: 2rem;
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 33, 71, 0.2);
         }
-        .service-detail-desc {
-            color: #333;
-            font-size: 1.08rem;
-            line-height: 1.7;
+
+        .submit-btn:active {
+            transform: translateY(0);
         }
-        @media (max-width: 600px) {
-            .services-detail {
-                padding: 1.2rem 0.5rem;
-                border-radius: 10px;
+
+        .submit-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover .submit-icon {
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .booking-form-container {
+                padding: 2rem;
+                margin: 1rem;
             }
-            .services-detail h1 {
-                font-size: 1.3rem;
+
+            .booking-form-container h2 {
+                font-size: 1.5rem;
             }
-            .service-detail-title {
-                font-size: 1.1rem;
+
+            .form-group {
+                margin-bottom: 1rem;
             }
-            .service-detail-icon {
-                font-size: 1.3rem;
+
+            .form-group label {
+                font-size: 0.9rem;
+            }
+
+            .submit-btn {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .booking-form-container {
+                padding: 1.5rem;
+            }
+
+            .popup-modal-close {
+                right: 1rem;
+                top: 1rem;
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -194,29 +458,167 @@
         </div>
     </section>
     <div class="services-detail">
-        
         <div class="service-detail-block">
-            <div class="service-detail-title"><span class="service-detail-icon">🏠</span>Residential Cleaning</div>
+            <div class="service-detail-title">
+                <span class="service-detail-icon">🏠</span>
+                Residential Cleaning
+            </div>
             <div class="service-detail-desc">
-                Our residential cleaning service is designed to keep your home sparkling clean and comfortable. We offer regular, deep, and move-in/move-out cleaning tailored to your needs. Our team uses eco-friendly products and pays attention to every detail, ensuring kitchens, bathrooms, bedrooms, and living areas are spotless. Flexible scheduling and custom checklists are available to fit your lifestyle.
+                Transform your home into a pristine sanctuary with our comprehensive residential cleaning service. Our experienced team delivers meticulous attention to detail, ensuring every corner of your home sparkles.
+            </div>
+            <ul class="service-detail-features">
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Deep carpet cleaning
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Kitchen sanitization
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Bathroom disinfection
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Window cleaning
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Dusting & polishing
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Pet-friendly cleaning
+                </li>
+            </ul>
+            <div class="service-cta">
+                <a href="#" class="service-cta-btn" onclick="openBookingModal()">
+                    Book Now <span>→</span>
+                </a>
             </div>
         </div>
+
         <div class="service-detail-block">
-            <div class="service-detail-title"><span class="service-detail-icon">🏢</span>Commercial Cleaning</div>
+            <div class="service-detail-title">
+                <span class="service-detail-icon">🏢</span>
+                Commercial Cleaning
+            </div>
             <div class="service-detail-desc">
-                ScrubHub Express provides professional cleaning for offices, retail spaces, and commercial properties. We understand the importance of a clean work environment for productivity and health. Our vetted and insured cleaners handle everything from desks and floors to restrooms and communal areas, working after hours or on weekends to minimize disruption to your business.
+                Keep your business environment professional and hygienic with our specialized commercial cleaning services. We work around your schedule to minimize disruption while maximizing cleanliness.
+            </div>
+            <ul class="service-detail-features">
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Office sanitization
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Floor maintenance
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Restroom cleaning
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Break room cleaning
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Window cleaning
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Waste management
+                </li>
+            </ul>
+            <div class="service-cta">
+                <a href="#" class="service-cta-btn" onclick="openBookingModal()">
+                    Book Now <span>→</span>
+                </a>
             </div>
         </div>
+
         <div class="service-detail-block">
-            <div class="service-detail-title"><span class="service-detail-icon">🧹</span>Deep Cleaning</div>
+            <div class="service-detail-title">
+                <span class="service-detail-icon">🧹</span>
+                Deep Cleaning
+            </div>
             <div class="service-detail-desc">
-                Our deep cleaning service is perfect for spring cleaning, post-renovation, or preparing for special occasions. We go beyond the basics, tackling hard-to-reach areas, appliances, baseboards, and more. This service is ideal for clients who want a thorough, top-to-bottom clean that leaves every corner refreshed and sanitized.
+                Our thorough deep cleaning service reaches every nook and cranny, perfect for spring cleaning, post-renovation cleanup, or preparing for special occasions. We tackle the tough jobs you've been putting off.
+            </div>
+            <ul class="service-detail-features">
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Behind furniture
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Inside appliances
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Wall cleaning
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Cabinet detailing
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Baseboard cleaning
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Light fixtures
+                </li>
+            </ul>
+            <div class="service-cta">
+                <a href="#" class="service-cta-btn" onclick="openBookingModal()">
+                    Book Now <span>→</span>
+                </a>
             </div>
         </div>
+
         <div class="service-detail-block">
-            <div class="service-detail-title"><span class="service-detail-icon">⚡</span>Same Day Express Cleaning</div>
+            <div class="service-detail-title">
+                <span class="service-detail-icon">⚡</span>
+                Same Day Express
+            </div>
             <div class="service-detail-desc">
-                Need cleaning in a hurry? Our Same Day Express Cleaning is designed for urgent situations—unexpected guests, last-minute events, or end-of-tenancy emergencies. Book online or by phone, and our local Hull-based team will arrive promptly, equipped to deliver a fast, high-quality clean without compromising on standards.
+                When you need it done now, our express service delivers rapid response cleaning without compromising on quality. Perfect for emergencies, last-minute guests, or urgent property viewings.
+            </div>
+            <ul class="service-detail-features">
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    2-hour response
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Priority booking
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Emergency cleaning
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Quick turnaround
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    Weekend service
+                </li>
+                <li class="service-detail-feature">
+                    <span class="feature-icon">✓</span>
+                    24/7 support
+                </li>
+            </ul>
+            <div class="service-cta">
+                <a href="#" class="service-cta-btn" onclick="openBookingModal()">
+                    Book Now <span>→</span>
+                </a>
             </div>
         </div>
     </div>
@@ -225,9 +627,9 @@
             <div class="footer-section">
                 <h3>SCRUBHUB EXPRESS</h3>
                 <p>Professional cleaning services for homes and businesses in Hull and surrounding areas. Fast, reliable, and eco-friendly.</p>
-                <p>📍 44 Portland Street, Hull, HU2 8JX, UK</p>
-                <p>📧 info@scrubhubexpress.co.uk</p>
-                <p>📞 +44 7442 850748</p>
+                <p><a href="https://maps.google.com/?q=44+Portland+Street,+Hull,+HU2+8JX,+UK" target="_blank" title="Open in Google Maps">📍 44 Portland Street, Hull, HU2 8JX, UK</a></p>
+                <p><a href="mailto:info@scrubhubexpress.co.uk" title="Send us an email">📧 info@scrubhubexpress.co.uk</a></p>
+                <p><a href="tel:+447442850748" title="Call us">📞 +44 7442 850748</a></p>
             </div>
             
             <div class="footer-section">
@@ -290,6 +692,81 @@
             <div>Call us at <br><strong>+44 7442 850748</strong></div>
         </div>
     </div>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="popup-modal">
+        <div class="booking-form-container">
+            <button class="popup-modal-close" onclick="closeBookingModal()">&times;</button>
+            <h2>Book Your Cleaning Service</h2>
+            <form id="booking-form" onsubmit="handleBookingSubmit(event)">
+                <div class="form-group">
+                    <label for="full-name">Full Name *</label>
+                    <input type="text" id="full-name" name="full-name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                </div>
+
+                <div class="form-group">
+                    <label for="service-type">Service Type *</label>
+                    <select name="service-type" id="service-type" required>
+                        <option value="">Select a service...</option>
+                        <option value="residential">Residential Cleaning</option>
+                        <option value="commercial">Commercial Cleaning</option>
+                        <option value="deep">Deep Cleaning</option>
+                        <option value="express">Same Day Express</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Preferred Date *</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Preferred Time *</label>
+                    <select name="time" id="time" required>
+                        <option value="">Choose preferred time...</option>
+                        <option value="morning">Morning (8:00 - 12:00)</option>
+                        <option value="afternoon">Afternoon (12:00 - 16:00)</option>
+                        <option value="evening">Evening (16:00 - 20:00)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address *</label>
+                    <textarea id="address" name="address" required placeholder="Enter your full address"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="special-instructions">Special Instructions</label>
+                    <textarea id="special-instructions" name="special-instructions" placeholder="Any specific requirements or areas that need special attention?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment">Payment Method *</label>
+                    <select name="payment" id="payment" required>
+                        <option value="">Choose payment method...</option>
+                        <option value="card">Card Payment</option>
+                        <option value="cash">Cash Payment</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <span class="submit-text">Book Now</span>
+                    <span class="submit-icon">→</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <script>
     document.getElementById('call-us-link').addEventListener('click', function(e) {
         e.preventDefault();
@@ -304,33 +781,113 @@
             document.getElementById('call-modal').style.display = 'flex';
         });
     }
+
+    // Booking Modal Functions
+    function openBookingModal() {
+        document.getElementById('booking-modal').style.display = 'flex';
+        // Pre-select service type based on which button was clicked
+        const serviceType = event.target.closest('.service-detail-block')?.querySelector('.service-detail-title')?.textContent.trim();
+        if (serviceType) {
+            const select = document.getElementById('service-type');
+            for(let option of select.options) {
+                if(option.text.toLowerCase().includes(serviceType.toLowerCase())) {
+                    option.selected = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    function closeBookingModal() {
+        document.getElementById('booking-modal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('booking-modal');
+        if (event.target === modal) {
+            closeBookingModal();
+        }
+    });
+
+    // Set minimum date to today
+    document.addEventListener('DOMContentLoaded', function() {
+        const dateInput = document.getElementById('date');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+        }
+    });
+
+    function handleBookingSubmit(event) {
+        event.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries());
+        
+        // Here you would typically send this data to your backend
+        console.log('Booking submitted:', data);
+        
+        // Show success message
+        alert('Thank you for your booking! We will contact you shortly to confirm the details.');
+        
+        // Close modal
+        closeBookingModal();
+        
+        // Reset form
+        event.target.reset();
+    }
     </script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-              // Simple mobile menu toggle
-      const navMenu = document.querySelector('.nav-menu');
-      const menuBtn = document.getElementById('menu-btn');
-      
-      if (menuBtn && navMenu) {
-        menuBtn.addEventListener('click', function() {
-          navMenu.classList.toggle('show');
+        // Simple mobile menu toggle
+        const navMenu = document.querySelector('.nav-menu');
+        const menuBtn = document.getElementById('menu-btn');
+        const dropdownLinks = document.querySelectorAll('.dropdown > a');
+        
+        if (menuBtn && navMenu) {
+            menuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('show');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!menuBtn.contains(event.target) && !navMenu.contains(event.target)) {
+                    navMenu.classList.remove('show');
+                    // Close all dropdowns
+                    document.querySelectorAll('.dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
+                }
+            });
+        }
+        
+        // Handle dropdown toggles on mobile
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const dropdown = this.parentElement;
+                    dropdown.classList.toggle('active');
+                    
+                    // Close other dropdowns
+                    dropdownLinks.forEach(otherLink => {
+                        if (otherLink !== this) {
+                            otherLink.parentElement.classList.remove('active');
+                        }
+                    });
+                }
+            });
         });
         
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-          if (!menuBtn.contains(event.target) && !navMenu.contains(event.target)) {
-            navMenu.classList.remove('show');
-          }
-        });
-      }
-      
-      // Home navigation on logo/name click
-      const navBrand = document.querySelector('.nav-brand');
-      if (navBrand) {
-        navBrand.addEventListener('click', function() {
-          window.location.href = '/';
-        });
-      }
+        // Home navigation on logo/name click
+        const navBrand = document.querySelector('.nav-brand');
+        if (navBrand) {
+            navBrand.addEventListener('click', function() {
+                window.location.href = '/';
+            });
+        }
     });
     </script>
 </body>
