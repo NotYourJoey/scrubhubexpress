@@ -193,7 +193,7 @@
                     <a href="#contact">Contact</a>
                     <ul class="dropdown-menu">
                         <li><a href="https://wa.me/447442850748" target="_blank">Whatsapp Us</a></li>
-                        <li><a href="#" id="call-us-link">Call Us</a></li>
+                        <li><a href="tel:+447442850748" id="call-us-link">Call Us</a></li>
                         <li><a href="mailto:info@scrubhubexpress.co.uk">Email</a></li>
                     </ul>
                 </li>
@@ -336,23 +336,6 @@
                     if (e.target === this) {
                         closeBookingModal();
                     }
-                });
-            }
-            
-            // Call Now button (CTA section)
-            const callNowBtn = document.getElementById('call-now-btn');
-            if (callNowBtn) {
-                callNowBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    let modal = document.getElementById('call-modal');
-                    if (!modal) {
-                        modal = document.createElement('div');
-                        modal.id = 'call-modal';
-                        modal.className = 'popup-modal';
-                        modal.innerHTML = `<div class='popup-modal-content'><button class='popup-modal-close' onclick="document.getElementById('call-modal').style.display='none'">&times;</button><div>Call us at <br><strong>+44 7442 850748</strong></div></div>`;
-                        document.body.appendChild(modal);
-                    }
-                    modal.style.display = 'flex';
                 });
             }
         });
@@ -705,10 +688,6 @@
         <section class="cta-section">
             <h2>Ready for a spotless office/home?</h2>
             <div class="cta-buttons">
-                <a href="#" class="cta-btn" id="book-clean-btn">
-                    <span class="cta-icon">🧹</span>
-                    <span>Book a Clean</span>
-                </a>
                 <a href="https://wa.me/447442850748" class="cta-btn" target="_blank">
                     <span class="cta-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -717,7 +696,7 @@
                     </span>
                     <span>WhatsApp Us</span>
                 </a>
-                <a href="#" class="cta-btn" id="call-now-btn">
+                <a href="tel:+447442850748" class="cta-btn" id="call-now-btn">
                     <span class="cta-icon">📞</span>
                     <span>Call Now</span>
                 </a>
@@ -756,7 +735,7 @@
                 <h3>Quick Contact</h3>
                 <p><a href="https://wa.me/447442850748" target="_blank">WhatsApp Us</a></p>
                 <p><a href="mailto:info@scrubhubexpress.co.uk">Email Us</a></p>
-                <p><a href="#" id="footer-call-link">Call Now</a></p>
+                <p><a href="tel:+447442850748">Call Now</a></p>
                 <p><a href="about/">About Us</a></p>
             </div>
             
@@ -837,57 +816,6 @@
         if (navBrand) {
             navBrand.addEventListener('click', function() {
                 window.location.href = '/';
-            });
-        }
-
-        // Navigation dropdown call link
-        var callLink = document.getElementById('call-us-link');
-        if (callLink) {
-            callLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                let modal = document.getElementById('call-modal');
-                if (!modal) {
-                    modal = document.createElement('div');
-                    modal.id = 'call-modal';
-                    modal.className = 'popup-modal';
-                    modal.innerHTML = `<div class='popup-modal-content'><button class='popup-modal-close' onclick="document.getElementById('call-modal').style.display='none'">&times;</button><div>Call us at <br><strong>+44 7442 850748</strong></div></div>`;
-                    document.body.appendChild(modal);
-                }
-                modal.style.display = 'flex';
-            });
-        }
-        
-        // CTA section call now button
-        var callNowBtn = document.getElementById('call-now-btn');
-        if (callNowBtn) {
-            callNowBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                let modal = document.getElementById('call-modal');
-                if (!modal) {
-                    modal = document.createElement('div');
-                    modal.id = 'call-modal';
-                    modal.className = 'popup-modal';
-                    modal.innerHTML = `<div class='popup-modal-content'><button class='popup-modal-close' onclick="document.getElementById('call-modal').style.display='none'">&times;</button><div>Call us at <br><strong>+44 7442 850748</strong></div></div>`;
-                    document.body.appendChild(modal);
-                }
-                modal.style.display = 'flex';
-            });
-        }
-        
-        // Footer call link
-        var footerCallLink = document.getElementById('footer-call-link');
-        if (footerCallLink) {
-            footerCallLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                let modal = document.getElementById('call-modal');
-                if (!modal) {
-                    modal = document.createElement('div');
-                    modal.id = 'call-modal';
-                    modal.className = 'popup-modal';
-                    modal.innerHTML = `<div class='popup-modal-content'><button class='popup-modal-close' onclick="document.getElementById('call-modal').style.display='none'">&times;</button><div>Call us at <br><strong>+44 7442 850748</strong></div></div>`;
-                    document.body.appendChild(modal);
-                }
-                modal.style.display = 'flex';
             });
         }
     });
